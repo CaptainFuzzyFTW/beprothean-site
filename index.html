@@ -182,13 +182,6 @@
                             <div class="progress-fill" id="compressionProgress"></div>
                         </div>
                     </div>
-
-                    <div id="decompressionModule" class="hidden">
-                        <p class="text-sm text-slate-300 mb-2">Decompressing... <span id="decompressionPercent">0</span>%</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="decompressionProgress"></div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="mt-6 w-full hidden" id="demoResults">
@@ -381,35 +374,15 @@
         const closeModal = (id) => document.getElementById(id).close();
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Memory DNA Demo Logic
+        // Memory DNA Demo Logic - Now a server-side process
         const fileInput = document.getElementById('fileInput');
         const uploadText = document.getElementById('uploadText');
         const demoState = document.getElementById('demoState');
         const demoResults = document.getElementById('demoResults');
-        const compressionModule = document.getElementById('compressionModule');
-        const decompressionModule = document.getElementById('decompressionModule');
         const compressionProgress = document.getElementById('compressionProgress');
-        const decompressionProgress = document.getElementById('decompressionProgress');
         const originalSizeSpan = document.getElementById('originalSize');
         const compressedSizeSpan = document.getElementById('compressedSize');
         const downloadLink = document.getElementById('downloadLink');
-
-        // This is a placeholder for the encrypted Memory DNA algorithm
-        // It provides a simulated compression ratio for the demo
-        const runMemoryDNA = (file) => {
-            return new Promise(resolve => {
-                const originalSize = file.size;
-                const compressionRatio = Math.random() * (0.8 - 0.2) + 0.2; // 20% to 80% reduction
-                const compressedSize = originalSize * compressionRatio;
-                setTimeout(() => {
-                    resolve({ originalSize, compressedSize, data: file });
-                }, 2000); // Simulate processing time
-            });
-        };
-
-        const updateProgress = (element, percent) => {
-            element.style.width = `${percent}%`;
-        };
 
         const simulateProgress = (element, duration, callback) => {
             let start = null;
@@ -417,7 +390,7 @@
                 if (!start) start = timestamp;
                 const progress = timestamp - start;
                 const percent = Math.min(progress / duration * 100, 100);
-                updateProgress(element, percent);
+                element.style.width = `${percent}%`;
                 if (progress < duration) {
                     window.requestAnimationFrame(step);
                 } else {
@@ -427,6 +400,40 @@
             window.requestAnimationFrame(step);
         };
 
+        const uploadAndCompress = async (file) => {
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('/api/memory-dna-compress', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const compressedSize = blob.size;
+                const originalSize = file.size;
+
+                // Prepare file for download
+                const url = URL.createObjectURL(blob);
+                downloadLink.href = url;
+                downloadLink.textContent = `Download Compressed File`;
+                
+                originalSizeSpan.textContent = (originalSize / 1024).toFixed(2);
+                compressedSizeSpan.textContent = (compressedSize / 1024).toFixed(2);
+                demoResults.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Compression failed:', error);
+                uploadText.textContent = 'Compression failed. Please try again.';
+                demoState.classList.add('hidden');
+            }
+        };
+
         fileInput.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -434,23 +441,12 @@
             // Show demo state
             demoState.classList.remove('hidden');
             demoResults.classList.add('hidden');
-            compressionModule.classList.remove('hidden');
-            decompressionModule.classList.add('hidden');
-            updateProgress(compressionProgress, 0);
+            compressionProgress.style.width = '0%';
 
-            // Simulate compression
-            simulateProgress(compressionProgress, 2000, async () => {
-                const result = await runMemoryDNA(file);
-                originalSizeSpan.textContent = (result.originalSize / 1024).toFixed(2);
-                compressedSizeSpan.textContent = (result.compressedSize / 1024).toFixed(2);
-
-                // Prepare file for download
-                const blob = new Blob([file], { type: 'application/octet-stream' });
-                const url = URL.createObjectURL(blob);
-                downloadLink.href = url;
-                downloadLink.textContent = `Download Compressed File`;
-                
-                demoResults.classList.remove('hidden');
+            // Simulate server round trip time with a progress bar
+            simulateProgress(compressionProgress, 3000, () => {
+                // Once "done," run the actual fetch
+                uploadAndCompress(file);
             });
         });
 

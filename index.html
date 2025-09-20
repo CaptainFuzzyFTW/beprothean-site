@@ -405,7 +405,7 @@
             formData.append('file', file);
             
             try {
-                const response = await fetch('/api/memory-dna-compress', {
+                const response = await fetch('http://localhost:3000/api/memory-dna-compress', {
                     method: 'POST',
                     body: formData,
                 });

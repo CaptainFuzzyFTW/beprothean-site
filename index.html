@@ -10,8 +10,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827;
-            color: #d1d5db;
+            background-color: #f0f5f9;
+            color: #1f2937;
         }
         .bg-hero {
             background-image: url('https://generated-image.com'); /* Placeholder, replaced by API call */
@@ -26,12 +26,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(17, 24, 39, 0.5);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
         .text-hero-gradient {
-            background-image: linear-gradient(to right, #e5e7eb, #d1d5db);
+            background-image: linear-gradient(to right, #1f2937, #374151);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -51,40 +51,44 @@
             background-color: #3b82f6;
         }
         .glass-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 2rem;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 0.5rem;
             box-shadow: 
-                0 4px 30px rgba(0, 0, 0, 0.3),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 4px 30px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(40px) saturate(150%);
             -webkit-backdrop-filter: blur(40px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .glass-card:hover {
             transform: translateY(-8px);
             box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.5), 
+                0 20px 40px rgba(0, 0, 0, 0.2), 
                 0 0 30px rgba(96, 165, 250, 0.4);
         }
     </style>
 </head>
-<body class="bg-[#111827] text-[#d1d5db]">
+<body class="bg-[#f0f5f9] text-[#1f2937]">
 
     <!-- Navigation Bar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#111827]/50 backdrop-blur-xl border-b border-gray-700">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-xl border-b border-gray-300">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <a href="#hero" class="flex-shrink-0 text-xl font-bold text-gray-200 tracking-wide">
-                    Be <span class="text-gradient-main">Prothean</span>
+                <a href="#hero" class="flex-shrink-0 text-xl font-bold text-gray-800 tracking-wide">
+                    BE <span class="text-gradient-main">Prothean</span>
                 </a>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#vision" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Vision</a>
-                        <a href="#modules" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Modules</a>
-                        <a href="#story" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Our Story</a>
-                        <a href="#contact" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                        <a href="memory_dna.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">Memory DNA</a>
+                        <a href="universal_pattern_engine.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">UPE</a>
+                        <a href="radiant_tree_network.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">RTN</a>
+                        <a href="guardian_ai.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">Guardian AI</a>
+                        <a href="human_nature_protocol.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">HNP</a>
+                        <a href="bijective_mapping.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">Bijective Mapping</a>
+                        <a href="quantum_entanglement_protocol.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">QEP</a>
+                        <a href="sentient_node_architecture.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition">SNA</a>
                     </div>
                 </div>
             </div>
@@ -95,7 +99,7 @@
     <section id="hero" class="relative overflow-hidden bg-hero py-48 lg:py-64 min-h-screen flex items-center justify-center">
         <script>
             async function generateHeroImage() {
-                const prompt = "A futuristic robotic arm with a sleek, glowing hand gently touching a digital stream of data that forms the shape of a complex, beautiful double helix. The background is a clean, minimalist dark space with subtle light trails and a sense of depth. NO TEXT.";
+                const prompt = "A photorealistic, highly detailed image of a modern, sophisticated hospital or tech company lobby. The design is minimalist, with a predominant color palette of white, off-white, and subtle pearl-like tones. Sunlight streams in through large, angled windows, casting long shadows and creating a bright, airy, and optimistic atmosphere. The space features hints of blues and serene cyan in decorative elements or subtle lighting. In the foreground, a medical professional in a clean, elegant lab coat holds a futuristic, handheld medical device that glows with a gentle, non-holographic light. On a table nearby, a business-class enterprise software toolkit is visible, its sleek design and subtle glow hinting at advanced technology without being ostentatious. The overall feel is one of serene confidence, innovation, and trust. No floating objects, no excessive light trails, no futuristic text or logos.";
                 const payload = {
                     instances: { prompt: prompt },
                     parameters: { "sampleCount": 1 }
@@ -129,16 +133,16 @@
         <div class="overlay"></div>
         <div class="relative z-10 max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-hero-gradient drop-shadow-lg">
-                Your future. Your Memory.
+                Memory DNA
             </h1>
-            <p class="mt-4 text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto drop-shadow-lg">
-                Prothean is a new form of intelligence, one that understands the fundamental building blocks of life itself to create a future of elegant simplicity.
+            <p class="mt-4 text-lg sm:text-xl text-gray-800 max-w-3xl mx-auto drop-shadow-lg">
+                The elegant core of the Prothean system, understanding data on a fundamental, emotional level to unlock the memory of your future.
             </p>
             <div class="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href="#vision" class="cta-button inline-flex items-center px-8 py-4 border border-transparent text-base font-semibold rounded-full text-white bg-blue-600 shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-600">
                     Explore the Vision
                 </a>
-                <a href="#contact" class="cta-button inline-flex items-center px-8 py-4 border border-gray-400 text-base font-semibold rounded-full text-gray-200 bg-transparent hover:bg-white/10 shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-400">
+                <a href="#contact" class="cta-button inline-flex items-center px-8 py-4 border border-gray-400 text-base font-semibold rounded-full text-gray-800 bg-transparent hover:bg-white/10 shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-400">
                     Get in Touch
                 </a>
             </div>
@@ -146,52 +150,52 @@
     </section>
 
     <!-- Vision Section -->
-    <section id="vision" class="py-24 bg-[#1f2937]">
+    <section id="vision" class="py-24 bg-[#f0f5f9]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 leading-tight">
                 Beyond Intelligence, <span class="text-gradient-main">a Guardian</span>
             </h2>
-            <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
                 BE Prothean doesn't just process data; it understands it on a fundamental level, giving you peace of mind that feels truly personal.
             </p>
             <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Data Security -->
+                <!-- Global Financial Disruption -->
                 <div class="glass-card p-8 text-center">
                     <div class="flex justify-center items-center w-16 h-16 rounded-full bg-blue-600 text-white mx-auto shadow-lg">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11a4 4 0 100-8 4 4 0 000 8zm0 1c3.866 0 7 2.239 7 5s-3.134 5-7 5-7-2.239-7-5 3.134-5 7-5z"/></svg>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold text-white">Global Financial Disruption</h3>
-                    <p class="mt-2 text-gray-400">
+                    <h3 class="mt-6 text-xl font-semibold text-gray-800">Global Financial Disruption</h3>
+                    <p class="mt-2 text-gray-600">
                         The World Economic Forum reports a **$1.8 trillion loss** in 2023 due to cybercrime and fraud alone. This is an era of unprecedented financial insecurity.
                     </p>
                 </div>
-                <!-- Universal Pattern Engine -->
+                <!-- The Industrial Burden -->
                 <div class="glass-card p-8 text-center">
-                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-cyan-500 text-white mx-auto shadow-lg">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-blue-600 text-white mx-auto shadow-lg">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold text-white">The Industrial Burden</h3>
-                    <p class="mt-2 text-gray-400">
+                    <h3 class="mt-6 text-xl font-semibold text-gray-800">The Industrial Burden</h3>
+                    <p class="mt-2 text-gray-600">
                         The World Bank estimates that manufacturing creates a staggering **1.3 billion metric tons** of waste annually.
                     </p>
                 </div>
-                <!-- Reskilling the Workforce -->
+                <!-- The Evolving Workforce -->
                 <div class="glass-card p-8 text-center">
-                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-sky-500 text-white mx-auto shadow-lg">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-blue-600 text-white mx-auto shadow-lg">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold text-white">The Evolving Workforce</h3>
-                    <p class="mt-2 text-gray-400">
+                    <h3 class="mt-6 text-xl font-semibold text-gray-800">The Evolving Workforce</h3>
+                    <p class="mt-2 text-gray-600">
                         The World Economic Forum projects that **85 million jobs** will be displaced by automation in the next 5 years, highlighting a need for rapid reskilling.
                     </p>
                 </div>
                 <!-- The Memory DNA -->
                 <div class="glass-card p-8 text-center">
-                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-teal-500 text-white mx-auto shadow-lg">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-blue-600 text-white mx-auto shadow-lg">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.674M12 3v12m-4 1h8m-11 0h14a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.586-1.586A1 1 0 0010.414 2H8.586a1 1 0 00-.707.293L6.293 3.586A1 1 0 015.586 4H4a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold text-white">The Memory DNA</h3>
-                    <p class="mt-2 text-gray-400">
+                    <h3 class="mt-6 text-xl font-semibold text-gray-800">The Memory DNA</h3>
+                    <p class="mt-2 text-gray-600">
                         The elegant core of the system, understanding data on a fundamental, emotional level. The **Memory DNA** is where your data comes to life.
                     </p>
                 </div>
@@ -200,26 +204,26 @@
     </section>
 
     <!-- Our Story Section -->
-    <section id="story" class="py-24 bg-[#1f2937]">
+    <section id="story" class="py-24 bg-[#f0f5f9]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 leading-tight">
                 Our <span class="text-gradient-main">Story</span>
             </h2>
             <div class="mt-12 flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
                 <div class="w-full md:w-1/2 text-left">
-                    <p class="text-lg text-gray-400">
+                    <p class="text-lg text-gray-600">
                         BE Prothean was born from a singular idea: that technology can understand and nurture the very "memory DNA" of our world. We're a team who wanted to build an intelligence that felt more like a trusted guardian than a complex machine. We were inspired by how naturally a single seed grows into a magnificent tree, and we built our system to work in the same way—quietly and elegantly, helping things grow and thrive.
                     </p>
-                    <p class="mt-6 text-lg text-gray-400">
+                    <p class="mt-6 text-lg text-gray-600">
                         Just like a cherished family story passed down through generations, our system is built on trust and a commitment to helping others. We believe that technology should be a gentle, natural part of your life, working for you and your community, always in the background.
                     </p>
                 </div>
                 <div class="w-full md:w-1/2">
                     <div class="relative w-full aspect-w-16 aspect-h-9 rounded-3xl overflow-hidden shadow-2xl">
-                        <img id="story-image" class="object-cover w-full h-full" src="https://generated-image.com" alt="A sophisticated, futuristic robotic hand and hand gently holding and offering a small green plant sprout to a young child's hand. Only the forearms and hands are visible against a soft, sunlit background." />
+                        <img id="story-image" class="object-cover w-full h-full" src="https://generated-image.com" alt="A beautiful and elegant view of a house in the lower Sierra Nevada mountains near Yosemite. The house is modern, with large windows, and lots of beautiful yamadori trees around it. A small, elegant drone, powered by Prothean technology, is gently fertilizing and watering the trees." />
                         <script>
                             async function generateStoryImage() {
-                                const prompt = "A clean, elegant visualization of the Memory DNA helix, a double helix made of glowing, interconnected data points. The helix is composed of subtle, geometric shapes and light trails, set against a dark, ethereal background with a sense of infinite data and knowledge. The colors are soft blues and purples, and there is a sense of immense complexity and beauty. NO TEXT.";
+                                const prompt = "A beautiful and elegant view of a house in the lower Sierra Nevada mountains near Yosemite. The house is modern, with large windows, and lots of beautiful yamadori trees around it. A small, elegant drone, powered by Prothean technology, is gently fertilizing and watering the trees.";
                                 const payload = {
                                     instances: { prompt: prompt },
                                     parameters: { "sampleCount": 1 }
@@ -256,14 +260,14 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-[#1f2937] py-12">
+    <footer id="contact" class="bg-[#f0f5f9] py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <h3 class="text-xl font-semibold text-white">Ready to make life a little simpler?</h3>
-            <p class="mt-2">Contact us today to learn more.</p>
+            <h3 class="text-xl font-semibold text-gray-800">Ready to make life a little simpler?</h3>
+            <p class="mt-2 text-gray-600">Contact us today to learn more.</p>
             <div class="mt-6">
-                <a href="mailto:info@beprothean.org" class="text-blue-400 hover:text-blue-300 transition duration-300">info@beprothean.org</a>
+                <a href="mailto:info@beprothean.org" class="text-blue-600 hover:text-blue-500 transition duration-300">info@beprothean.org</a>
             </div>
-            <p class="mt-8 text-sm">
+            <p class="mt-8 text-sm text-gray-600">
                 &copy; 2024 BE Prothean. All Rights Reserved.
             </p>
         </div>
@@ -274,22 +278,27 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else {
+                    console.error("Target element not found for anchor link: " + this.getAttribute('href'));
+                }
             });
         });
     </script>
 
-    <!-- Stripe/Square Payment Portal Section -->
-    <section id="payment" class="py-24 bg-[#1f2937] text-white">
+    <!-- Payment Portal Section -->
+    <section id="payment" class="py-24 bg-[#f0f5f9] text-[#1f2937]">
         <div class="max-w-md mx-auto px-4 text-center">
-            <h2 class="text-3xl font-extrabold text-white">Start Your Future. Today.</h2>
-            <p class="mt-4 text-gray-400">
+            <h2 class="text-3xl font-extrabold text-gray-800">Start Your Future. Today.</h2>
+            <p class="mt-4 text-gray-600">
                 Purchase access to the Prothean API and begin building a more elegant and secure future.
             </p>
             <div class="mt-8">
-                <!-- IMPORTANT: This is a placeholder for the Square/Stripe button.
+                <!-- IMPORTANT: This is a placeholder for the payment button.
                      For a real application, you must handle this with a secure backend. -->
                 <button onclick="handlePurchase()" class="cta-button inline-flex items-center px-12 py-5 border border-transparent text-lg font-semibold rounded-full text-white bg-blue-600 shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-600">
                     Buy Memory DNA
@@ -297,5 +306,13 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function handlePurchase() {
+            // This is a placeholder function.
+            // In a real application, you would connect this to your payment backend.
+            console.log("Purchase button clicked. Connect to your payment backend.");
+        }
+    </script>
 </body>
 </html>

@@ -1,476 +1,301 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Be Prothean — Autonomous AI Suite</title>
-    <meta name="description" content="Be Prothean — an autonomous AI business suite. Subscribe, onboard, and get support with zero friction." />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BE Prothean - Ethereal Future</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --brand: #0ea5e9;
-            --brandDark: #0284c7;
-            --accent: #9333ea; /* A subtle violet accent */
-            --ink: #0b1220;
-            --paper: #0b1220;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #d1d5db;
         }
-
-        html, body {
+        .bg-hero {
+            background-image: url('https://generated-image.com'); /* Placeholder, replaced by API call */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: radial-gradient(at 50% 120%, rgba(147, 51, 234, 0.05) 0%, transparent 60%), linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
-            color: #e5e7eb;
-            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
-            overflow-x: hidden;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(17, 24, 39, 0.5);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1.5rem;
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .text-hero-gradient {
+            background-image: linear-gradient(to right, #e5e7eb, #d1d5db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-main {
+            background-image: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cta-button {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(97, 218, 251, 0.4);
+            background-color: #3b82f6;
+        }
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+            box-shadow: 
+                0 4px 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .glass:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(14, 165, 233, 0.2);
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5), 
+                0 0 30px rgba(96, 165, 250, 0.4);
         }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            padding: 1rem 1.5rem;
-            border-radius: .8rem;
-            font-weight: 600;
-            transition: all .2s ease;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--brand) 0%, var(--brandDark) 100%);
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4);
-        }
-        .btn-ghost {
-            background: rgba(255, 255, 255, 0.06);
-            color: #e5e7eb;
-        }
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-        .badge {
-            font-size:.75rem;
-            padding:.25rem .6rem;
-            border-radius:999px;
-            background:rgba(14,165,233,.15);
-            color:#93c5fd;
-            border:1px solid rgba(14,165,233,.3);
-        }
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-        }
-        .card {
-            grid-column: span 12 / span 12;
-        }
-        @media (min-width: 768px) {
-            .card {
-                grid-column: span 6 / span 6;
-            }
-        }
-        @media (min-width: 1024px) {
-            .card {
-                grid-column: span 4 / span 4;
-            }
-        }
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .12), rgba(255, 255, 255, 0));
-        }
-        .code {
-            font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;
-            background: rgba(255,255,255,0.06);
-            padding:.25rem .5rem;
-            border-radius:.4rem;
-        }
-        .progress-bar {
-            height: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 999px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--brand) 100%);
-            transition: width 0.3s ease;
-        }
-        /* Simple modal */
-        dialog::backdrop { background: rgba(0,0,0,0.6); }
-        dialog { border:none; border-radius: 1rem; padding:0; max-width: 960px; width: 92vw; color:#0b1220; }
-        .modal-body { padding: 1.25rem 1.25rem 1.5rem; background: #ffffff; }
-        .modal-head { padding: 1rem 1.25rem; background: #f1f5f9; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; justify-content:space-between; }
-        .modal-head h3 { font-weight: 700; font-size: 1.15rem; color:#0b1220; }
-        .linklike { color:#60a5fa; cursor:pointer; }
     </style>
 </head>
-<body>
-    <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between z-10 relative">
-        <div class="flex items-center gap-3">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" class="drop-shadow" aria-hidden="true">
-                <defs>
-                    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                        <stop offset="0%" stop-color="#38bdf8"/>
-                        <stop offset="100%" stop-color="#0284c7"/>
-                    </linearGradient>
-                </defs>
-                <path d="M12 2c5.523 0 10 4.477 10 10 0 3.314-1.612 6.25-4.091 8.064-.896.642-2.163.1-2.38-.977l-.3-1.482a2 2 0 0 1 .617-1.9A6 6 0 1 0 6 12c0 1.736.742 3.3 1.932 4.4a2 2 0 0 1 .617 1.9l-.3 1.482c-.217 1.077-1.484 1.619-2.38.977C3.612 18.25 2 15.314 2 12 2 6.477 6.477 2 12 2Z" fill="url(#g)"/>
-            </svg>
-            <span class="text-xl md:text-2xl font-extrabold tracking-tight">Be Prothean</span>
-            <span class="badge hidden md:inline-flex">Autonomous AI Suite</span>
-        </div>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
-            <a href="#features" class="hover:text-white transition">Features</a>
-            <a href="#pricing" class="hover:text-white transition">Pricing</a>
-            <a href="#docs" class="hover:text-white transition">Docs</a>
-            <a href="#support" class="hover:text-white transition">Support</a>
-            <a class="hover:text-white linklike transition" onclick="openModal('legalModal')">Legal</a>
+<body class="bg-[#111827] text-[#d1d5db]">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#111827]/50 backdrop-blur-xl border-b border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#hero" class="flex-shrink-0 text-xl font-bold text-gray-200 tracking-wide">
+                    Be <span class="text-gradient-main">Prothean</span>
+                </a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#vision" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Vision</a>
+                        <a href="#modules" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Modules</a>
+                        <a href="#story" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Our Story</a>
+                        <a href="#contact" class="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                    </div>
+                </div>
+            </div>
         </nav>
-        <div class="flex items-center gap-3">
-            <a href="#app" class="btn btn-ghost">Sign In</a>
-            <a href="#pricing" class="btn btn-primary">Get Started</a>
-        </div>
     </header>
 
-    <section class="max-w-7xl mx-auto px-6 py-20 md:py-32 relative z-0">
-        <div class="grid md:grid-cols-golden-ratio gap-12 items-center">
-            <div>
-                <span class="badge">WY • LLC • Stripe Ready</span>
-                <h1 class="mt-4 text-5xl md:text-7xl font-extrabold leading-tight tracking-tighter">
-                    Intelligence, on your terms.
-                </h1>
-                <p class="mt-6 text-slate-300 text-lg md:text-xl">
-                    Be Prothean is a zero-friction SaaS storefront for the Prothean AI toolset. Payments by Stripe. Instant access. AI onboarding and support.
-                </p>
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#pricing" class="btn btn-primary">Subscribe Now</a>
-                    <a href="#features" class="btn btn-ghost">See Features</a>
-                </div>
-                <p class="mt-6 text-xs text-slate-400">By subscribing you agree to our <span class="linklike" onclick="openModal('legalModal')">Terms & Privacy</span>.</p>
-            </div>
-            <div class="glass p-6 md:p-8 relative flex flex-col items-center">
-                <h3 class="text-lg font-bold mb-4">Memory DNA Demo</h3>
-                <div class="w-full">
-                    <label class="block text-sm font-medium text-slate-300 mb-2">Select a file to compress</label>
-                    <div class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-white/10 rounded-lg cursor-pointer hover:bg-white/5 transition">
-                        <svg class="w-12 h-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
-                        </svg>
-                        <p class="mt-2 text-sm text-slate-400" id="uploadText">Drag and drop or click to upload</p>
-                        <input type="file" id="fileInput" class="hidden" />
-                    </div>
-                </div>
-
-                <div class="mt-6 w-full hidden" id="demoState">
-                    <div id="compressionModule">
-                        <p class="text-sm text-slate-300 mb-2">Compressing... <span id="compressionPercent">0</span>%</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="compressionProgress"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 w-full hidden" id="demoResults">
-                    <p class="text-sm text-slate-300 mb-2">Original Size: <span id="originalSize"></span> KB</p>
-                    <p class="text-sm text-slate-300 mb-4">Compressed Size: <span id="compressedSize"></span> KB</p>
-                    <a id="downloadLink" class="btn btn-primary w-full text-center" href="#" download>Download Compressed File</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-6 py-4 opacity-80">
-        <div class="divider my-6"></div>
-        <p class="text-center text-slate-400 text-sm md:text-base">Trusted by pioneers. Engineered for tomorrow's challenges.<br>Powered by <span class="font-bold">Stripe</span> • <span class="font-bold">Supabase</span> • <span class="font-bold">Cloudflare</span> • <span class="font-bold">GitHub Pages</span></p>
-    </section>
-
-    <section id="features" class="max-w-7xl mx-auto px-6 py-10 md:py-20">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">Capabilities & Outcomes</h2>
-        <div class="grid-cards">
-            <div class="card glass">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold">Autonomous Storefront</h3>
-                    <p class="mt-2 text-slate-300">AI-driven pages, A/B testing and generation. Your business, always optimized.</p>
-                </div>
-            </div>
-            <div class="card glass">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold">Stripe Subscriptions</h3>
-                    <p class="mt-2 text-slate-300">Use Stripe Checkout + Customer Portal. No card data ever touches your server.</p>
-                </div>
-            </div>
-            <div class="card glass">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold">Instant Entitlements</h3>
-                    <p class="mt-2 text-slate-300">Post-checkout, users are routed to <span class="code">/app</span>. Access can be gated later with Supabase.</p>
-                </div>
-            </div>
-            <div class="card glass">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold">Docs & Security</h3>
-                    <p class="mt-2 text-slate-300">Built-in docs and a “Security & Privacy Practices” page to satisfy procurement.</p>
-                </div>
-            </div>
-            <div class="card glass">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold">AI Support</h3>
-                    <p class="mt-2 text-slate-300">Embed your agent; escalate to tickets. Works with FreeScout or your own inbox.</p>
-                </div>
-            </div>
-            <div class="card glass">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold">Zero Upfront Cost</h3>
-                    <p class="mt-2 text-slate-300">Host on GitHub/Cloudflare Pages. Only pay Stripe’s per-transaction fees.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="max-w-7xl mx-auto px-6 py-10 md:py-20">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-2">Flexible Pricing</h2>
-        <p class="text-slate-400 mb-8">Choose the plan that fits your needs. Start small and scale up easily.</p>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-8 flex flex-col justify-between">
-                <h3 class="text-2xl font-bold">Starter</h3>
-                <p class="text-slate-400 mt-2">For individuals exploring Prothean.</p>
-                <p class="mt-4 text-4xl font-extrabold">$19<span class="text-lg font-semibold text-slate-300">/mo</span></p>
-                <ul class="mt-6 space-y-2 text-sm text-slate-300">
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to UPE demo</li>
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Basic Memory DNA</li>
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Email support</li>
-                </ul>
-                <a class="btn btn-primary mt-8" href="https://buy.stripe.com/YOUR_STARTER_PAYMENT_LINK" target="_blank" rel="noopener">Choose Starter</a>
-            </div>
-            <div class="glass p-8 flex flex-col justify-between ring-2 ring-sky-500 relative">
-                <span class="absolute top-0 right-0 -mt-3 mr-4 badge bg-sky-500 text-white font-bold">Most Popular</span>
-                <h3 class="text-2xl font-bold">Pro</h3>
-                <p class="text-slate-400 mt-2">For builders and small teams.</p>
-                <p class="mt-4 text-4xl font-extrabold">$79<span class="text-lg font-semibold text-slate-300">/mo</span></p>
-                <ul class="mt-6 space-y-2 text-sm text-slate-300">
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Full UPE + Memory DNA</li>
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority support</li>
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Customer Portal access</li>
-                </ul>
-                <a class="btn btn-primary mt-8" href="https://buy.stripe.com/YOUR_PRO_PAYMENT_LINK" target="_blank" rel="noopener">Choose Pro</a>
-            </div>
-            <div class="glass p-8 flex flex-col justify-between">
-                <h3 class="text-2xl font-bold">Enterprise</h3>
-                <p class="text-slate-400 mt-2">Custom compliance & SLAs.</p>
-                <p class="mt-4 text-4xl font-extrabold">Contact</p>
-                <ul class="mt-6 space-y-2 text-sm text-slate-300">
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> SSO, DPA, procurement pack</li>
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority onboarding</li>
-                    <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom terms</li>
-                </ul>
-                <a class="btn btn-primary mt-8" href="#contact">Talk to Sales</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="docs" class="max-w-7xl mx-auto px-6 py-10 md:py-20">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-2">Getting Started</h2>
-        <p class="text-slate-300 mb-6">Here's a quick guide to launching your Prothean AI suite.</p>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass p-8">
-                <h3 class="font-bold text-2xl">Step-by-Step Guide</h3>
-                <ol class="list-decimal list-inside text-slate-300 mt-4 space-y-3 text-sm md:text-base">
-                    <li>Subscribe with Stripe via the plans above to gain access.</li>
-                    <li>Look for your unique, secure sign-in link in your email.</li>
-                    <li>Access your protected workspace and tools at <span class="code">/app</span>.</li>
-                </ol>
-            </div>
-            <div class="glass p-8">
-                <h3 class="font-bold text-2xl">Security & Privacy Practices</h3>
-                <ul class="mt-4 space-y-3 text-sm text-slate-300 md:text-base">
-                    <li><span class="font-bold">Card Data:</span> All transactions are securely handled by Stripe (PCI DSS compliant).</li>
-                    <li><span class="font-bold">Data Control:</span> You have full control. Data export or deletion is available upon request.</li>
-                    <li><span class="font-bold">Location:</span> We're a Wyoming, USA LLC, with clear legal and compliance standards.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="support" class="max-w-7xl mx-auto px-6 py-10 md:py-20">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-2">Dedicated Support</h2>
-        <p class="text-slate-300 mb-4">Our AI assistant is ready to help, or you can use the form below to open a ticket.</p>
-        <form class="glass rounded-2xl p-8 grid md:grid-cols-2 gap-6" action="https://formsubmit.co/YOUR_EMAIL@EXAMPLE.COM" method="POST">
-            <input type="hidden" name="_captcha" value="false">
-            <div>
-                <label class="text-sm text-slate-300 font-medium">Your email</label>
-                <input class="mt-1 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3" type="email" required name="email" placeholder="you@example.com">
-            </div>
-            <div>
-                <label class="text-sm text-slate-300 font-medium">Topic</label>
-                <select class="mt-1 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3" name="topic">
-                    <option>Billing</option>
-                    <option>Technical</option>
-                    <option>Compliance</option>
-                    <option>Partnerships</option>
-                </select>
-            </div>
-            <div class="md:col-span-2">
-                <label class="text-sm text-slate-300 font-medium">Message</label>
-                <textarea class="mt-1 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3" rows="6" required name="message" placeholder="How can we help?"></textarea>
-            </div>
-            <div class="md:col-span-2">
-                <button class="btn btn-primary w-full md:w-auto" type="submit">Send Message</button>
-            </div>
-        </form>
-    </section>
-
-    <section id="contact" class="max-w-7xl mx-auto px-6 py-10 md:py-20">
-        <div class="glass rounded-2xl p-8 md:p-10 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
-            <div>
-                <h3 class="text-3xl font-extrabold">Enterprise & Partnerships</h3>
-                <p class="text-slate-300 mt-3 max-w-xl">Need a DPA, SSO, or procurement package? We’ll prepare a Wyoming-based agreement and custom SLAs for your organization.</p>
-            </div>
-            <a class="btn btn-primary" href="mailto:info@bprothean.org">Contact Sales</a>
-        </div>
-    </section>
-
-    <footer class="max-w-7xl mx-auto px-6 py-10">
-        <div class="divider my-6"></div>
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <p class="text-slate-400 text-sm">© <span id="year"></span> Be Prothean LLC • Wyoming, USA</p>
-            <div class="flex items-center gap-5 text-sm">
-                <a class="linklike" onclick="openModal('legalModal')">Legal</a>
-                <a href="#docs" class="hover:text-white transition">Docs</a>
-                <a href="#support" class="hover:text-white transition">Support</a>
-            </div>
-        </div>
-    </footer>
-
-    <dialog id="legalModal">
-        <div class="modal-head">
-            <h3>Legal</h3>
-            <button class="linklike" onclick="closeModal('legalModal')">Close</button>
-        </div>
-        <div class="modal-body">
-            <h4 class="font-bold mb-2">Terms of Service (Simple)</h4>
-            <p class="text-sm mb-3">By using Be Prothean, you agree to: (a) pay subscription fees via Stripe; (b) not misuse the service; (c) accept that AI outputs may require human review.</p>
-            <h4 class="font-bold mb-2">Privacy Policy (Simple)</h4>
-            <p class="text-sm mb-3">Card data is processed by Stripe. We store minimal account data to deliver the service. Contact <a href="mailto:info@bprothean.org">info@bprothean.org</a> for data export or deletion.</p>
-            <h4 class="font-bold mb-2">Acceptable Use</h4>
-            <p class="text-sm">No illegal content, harassment, or attempts to bypass security. Enterprise DPAs available on request.</p>
-        </div>
-    </dialog>
-
-    <script>
-        const openModal = (id) => document.getElementById(id).showModal();
-        const closeModal = (id) => document.getElementById(id).close();
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Memory DNA Demo Logic - Now a server-side process
-        const fileInput = document.getElementById('fileInput');
-        const uploadText = document.getElementById('uploadText');
-        const demoState = document.getElementById('demoState');
-        const demoResults = document.getElementById('demoResults');
-        const compressionProgress = document.getElementById('compressionProgress');
-        const originalSizeSpan = document.getElementById('originalSize');
-        const compressedSizeSpan = document.getElementById('compressedSize');
-        const downloadLink = document.getElementById('downloadLink');
-
-        const simulateProgress = (element, duration, callback) => {
-            let start = null;
-            const step = (timestamp) => {
-                if (!start) start = timestamp;
-                const progress = timestamp - start;
-                const percent = Math.min(progress / duration * 100, 100);
-                element.style.width = `${percent}%`;
-                if (progress < duration) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    callback();
-                }
-            };
-            window.requestAnimationFrame(step);
-        };
-
-        const uploadAndCompress = async (file) => {
-            const formData = new FormData();
-            formData.append('file', file);
-            
-            try {
-                const response = await fetch('http://localhost:3000/api/memory-dna-compress', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const blob = await response.blob();
-                const compressedSize = blob.size;
-                const originalSize = file.size;
-
-                // Prepare file for download
-                const url = URL.createObjectURL(blob);
-                downloadLink.href = url;
-                downloadLink.textContent = `Download Compressed File`;
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden bg-hero py-48 lg:py-64 min-h-screen flex items-center justify-center">
+        <script>
+            async function generateHeroImage() {
+                const prompt = "A futuristic robotic arm with a sleek, glowing hand gently touching a digital stream of data that forms the shape of a complex, beautiful double helix. The background is a clean, minimalist dark space with subtle light trails and a sense of depth. NO TEXT.";
+                const payload = {
+                    instances: { prompt: prompt },
+                    parameters: { "sampleCount": 1 }
+                };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
                 
-                originalSizeSpan.textContent = (originalSize / 1024).toFixed(2);
-                compressedSizeSpan.textContent = (compressedSize / 1024).toFixed(2);
-                demoResults.classList.remove('hidden');
-                
-            } catch (error) {
-                console.error('Compression failed:', error);
-                uploadText.textContent = 'Compression failed. Please try again.';
-                demoState.classList.add('hidden');
+                for (let i = 0; i < 3; i++) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const result = await response.json();
+                        if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                            const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                            const heroSection = document.getElementById('hero');
+                            heroSection.style.backgroundImage = `url('${imageUrl}')`;
+                            return;
+                        }
+                    } catch (error) {
+                        console.error('API call failed, retrying...', error);
+                        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                    }
+                }
+                console.error("Failed to generate image after multiple retries.");
             }
-        };
+            window.onload = generateHeroImage;
+        </script>
+        <div class="overlay"></div>
+        <div class="relative z-10 max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-hero-gradient drop-shadow-lg">
+                Your future. Your Memory.
+            </h1>
+            <p class="mt-4 text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto drop-shadow-lg">
+                Prothean is a new form of intelligence, one that understands the fundamental building blocks of life itself to create a future of elegant simplicity.
+            </p>
+            <div class="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#vision" class="cta-button inline-flex items-center px-8 py-4 border border-transparent text-base font-semibold rounded-full text-white bg-blue-600 shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-600">
+                    Explore the Vision
+                </a>
+                <a href="#contact" class="cta-button inline-flex items-center px-8 py-4 border border-gray-400 text-base font-semibold rounded-full text-gray-200 bg-transparent hover:bg-white/10 shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-400">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </section>
 
-        fileInput.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
+    <!-- Vision Section -->
+    <section id="vision" class="py-24 bg-[#1f2937]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                Beyond Intelligence, <span class="text-gradient-main">a Guardian</span>
+            </h2>
+            <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+                BE Prothean doesn't just process data; it understands it on a fundamental level, giving you peace of mind that feels truly personal.
+            </p>
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Data Security -->
+                <div class="glass-card p-8 text-center">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-blue-600 text-white mx-auto shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11a4 4 0 100-8 4 4 0 000 8zm0 1c3.866 0 7 2.239 7 5s-3.134 5-7 5-7-2.239-7-5 3.134-5 7-5z"/></svg>
+                    </div>
+                    <h3 class="mt-6 text-xl font-semibold text-white">Global Financial Disruption</h3>
+                    <p class="mt-2 text-gray-400">
+                        The World Economic Forum reports a **$1.8 trillion loss** in 2023 due to cybercrime and fraud alone. This is an era of unprecedented financial insecurity.
+                    </p>
+                </div>
+                <!-- Universal Pattern Engine -->
+                <div class="glass-card p-8 text-center">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-cyan-500 text-white mx-auto shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="mt-6 text-xl font-semibold text-white">The Industrial Burden</h3>
+                    <p class="mt-2 text-gray-400">
+                        The World Bank estimates that manufacturing creates a staggering **1.3 billion metric tons** of waste annually.
+                    </p>
+                </div>
+                <!-- Reskilling the Workforce -->
+                <div class="glass-card p-8 text-center">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-sky-500 text-white mx-auto shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </div>
+                    <h3 class="mt-6 text-xl font-semibold text-white">The Evolving Workforce</h3>
+                    <p class="mt-2 text-gray-400">
+                        The World Economic Forum projects that **85 million jobs** will be displaced by automation in the next 5 years, highlighting a need for rapid reskilling.
+                    </p>
+                </div>
+                <!-- The Memory DNA -->
+                <div class="glass-card p-8 text-center">
+                    <div class="flex justify-center items-center w-16 h-16 rounded-full bg-teal-500 text-white mx-auto shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.674M12 3v12m-4 1h8m-11 0h14a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.586-1.586A1 1 0 0010.414 2H8.586a1 1 0 00-.707.293L6.293 3.586A1 1 0 015.586 4H4a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="mt-6 text-xl font-semibold text-white">The Memory DNA</h3>
+                    <p class="mt-2 text-gray-400">
+                        The elegant core of the system, understanding data on a fundamental, emotional level. The **Memory DNA** is where your data comes to life.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Show demo state
-            demoState.classList.remove('hidden');
-            demoResults.classList.add('hidden');
-            compressionProgress.style.width = '0%';
+    <!-- Our Story Section -->
+    <section id="story" class="py-24 bg-[#1f2937]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                Our <span class="text-gradient-main">Story</span>
+            </h2>
+            <div class="mt-12 flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                <div class="w-full md:w-1/2 text-left">
+                    <p class="text-lg text-gray-400">
+                        BE Prothean was born from a singular idea: that technology can understand and nurture the very "memory DNA" of our world. We're a team who wanted to build an intelligence that felt more like a trusted guardian than a complex machine. We were inspired by how naturally a single seed grows into a magnificent tree, and we built our system to work in the same way—quietly and elegantly, helping things grow and thrive.
+                    </p>
+                    <p class="mt-6 text-lg text-gray-400">
+                        Just like a cherished family story passed down through generations, our system is built on trust and a commitment to helping others. We believe that technology should be a gentle, natural part of your life, working for you and your community, always in the background.
+                    </p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="relative w-full aspect-w-16 aspect-h-9 rounded-3xl overflow-hidden shadow-2xl">
+                        <img id="story-image" class="object-cover w-full h-full" src="https://generated-image.com" alt="A sophisticated, futuristic robotic hand and hand gently holding and offering a small green plant sprout to a young child's hand. Only the forearms and hands are visible against a soft, sunlit background." />
+                        <script>
+                            async function generateStoryImage() {
+                                const prompt = "A clean, elegant visualization of the Memory DNA helix, a double helix made of glowing, interconnected data points. The helix is composed of subtle, geometric shapes and light trails, set against a dark, ethereal background with a sense of infinite data and knowledge. The colors are soft blues and purples, and there is a sense of immense complexity and beauty. NO TEXT.";
+                                const payload = {
+                                    instances: { prompt: prompt },
+                                    parameters: { "sampleCount": 1 }
+                                };
+                                const apiKey = "";
+                                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+                                
+                                for (let i = 0; i < 3; i++) {
+                                    try {
+                                        const response = await fetch(apiUrl, {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify(payload)
+                                        });
+                                        const result = await response.json();
+                                        if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                                            const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                                            document.getElementById('story-image').src = imageUrl;
+                                            return;
+                                        }
+                                    } catch (error) {
+                                        console.error('API call failed, retrying...', error);
+                                        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                                    }
+                                }
+                                console.error("Failed to generate story image after multiple retries.");
+                            }
+                            generateStoryImage();
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Simulate server round trip time with a progress bar
-            simulateProgress(compressionProgress, 3000, () => {
-                // Once "done," run the actual fetch
-                uploadAndCompress(file);
+    <!-- Footer -->
+    <footer id="contact" class="bg-[#1f2937] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <h3 class="text-xl font-semibold text-white">Ready to make life a little simpler?</h3>
+            <p class="mt-2">Contact us today to learn more.</p>
+            <div class="mt-6">
+                <a href="mailto:info@beprothean.org" class="text-blue-400 hover:text-blue-300 transition duration-300">info@beprothean.org</a>
+            </div>
+            <p class="mt-8 text-sm">
+                &copy; 2024 BE Prothean. All Rights Reserved.
+            </p>
+        </div>
+    </section>
+
+    <!-- JavaScript for smooth scrolling -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-
-        // Click handler for the dropzone
-        document.querySelector('.border-dashed').addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        // Drag and drop functionality
-        const dropzone = document.querySelector('.border-dashed');
-        dropzone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropzone.classList.add('ring-2', 'ring-sky-500');
-        });
-        dropzone.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('ring-2', 'ring-sky-500');
-        });
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('ring-2', 'ring-sky-500');
-            fileInput.files = e.dataTransfer.files;
-            fileInput.dispatchEvent(new Event('change'));
-        });
     </script>
+
+    <!-- Stripe/Square Payment Portal Section -->
+    <section id="payment" class="py-24 bg-[#1f2937] text-white">
+        <div class="max-w-md mx-auto px-4 text-center">
+            <h2 class="text-3xl font-extrabold text-white">Start Your Future. Today.</h2>
+            <p class="mt-4 text-gray-400">
+                Purchase access to the Prothean API and begin building a more elegant and secure future.
+            </p>
+            <div class="mt-8">
+                <!-- IMPORTANT: This is a placeholder for the Square/Stripe button.
+                     For a real application, you must handle this with a secure backend. -->
+                <button onclick="handlePurchase()" class="cta-button inline-flex items-center px-12 py-5 border border-transparent text-lg font-semibold rounded-full text-white bg-blue-600 shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-600">
+                    Buy Memory DNA
+                </button>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

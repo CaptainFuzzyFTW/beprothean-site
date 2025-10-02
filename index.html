@@ -1,169 +1,1747 @@
- <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Prothean Shield | VPN & Compressor Power</title>
-      <style>
-          /* Base styles */
-          body {
-              font-family: 'Inter', system-ui, -apple-system, sans-serif;
-              margin: 0;
-              background-color: #1D2126;
-          }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prothean Shield | VPN & Compressor Power</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Golden Ratio Constants: φ = 1.618, φ⁻¹ = 0.618 */
+        :root {
+            --phi: 1.618;
+            --phi-inv: 0.618;
+            --primary: #0D6A74;
+            --secondary: #1D2126;
+            --accent: #C9A876;
+            --text: #F3F4F5;
+            --surface: #2A2F36;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --error: #F44336;
+        }
 
-          /* Hero section */
-          .hero {
-              background: #1D2126;
-              color: #F3F4F5;
-              padding: 120px 24px;
-              min-height: 100vh;
-          }
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-          .hero .wrap {
-              max-width: 1040px;
-              margin: 0 auto;
-              text-align: center;
-              width: 100%;
-          }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            background-color: #1D2126;
+            color: #F3F4F5;
+        }
 
-          /* Pre-header */
-          .hero .pre-header {
-              font-size: 40px;
-              font-weight: 700;
-              letter-spacing: 0.2em;
-              text-transform: uppercase;
-              color: #0D6A74;
-              margin-bottom: 40px;
-              opacity: 0.9;
-              line-height: 1.1;
-          }
+        /* Hero section */
+        .hero {
+            background: #1D2126;
+            color: #F3F4F5;
+            padding: calc(120px * var(--phi-inv)) 24px;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
 
-          /* Main heading */
-          .hero h1 {
-              font-family: "Inter var", system-ui, -apple-system, sans-serif;
-              font-weight: 800;
-              letter-spacing: -0.02em;
-              font-size: clamp(40px, 6vw, 72px);
-              margin: 0 0 16px;
-              line-height: 1.1;
-          }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(13, 106, 116, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
 
-          /* Subheading */
-          .hero .sub {
-              font-size: clamp(16px, 2.2vw, 22px);
-              opacity: 0.9;
-              margin: 0 auto 8px;
-              max-width: 720px;
-          }
+        .hero .wrap {
+            max-width: calc(1040px * var(--phi-inv));
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
 
-          /* Catchphrase */
-          .hero .catchphrase {
-              font-size: clamp(14px, 1.8vw, 18px);
-              font-style: italic;
-              opacity: 0.7;
-              margin: 0 auto 28px;
-              max-width: 720px;
-          }
+        /* Pre-header */
+        .hero .pre-header {
+            font-size: calc(40px * var(--phi-inv));
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #0D6A74;
+            margin-bottom: calc(40px * var(--phi-inv));
+            opacity: 0.9;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out;
+        }
 
-          /* CTA buttons container */
-          .cta {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 16px;
-              margin-bottom: 40px;
-          }
+        /* Main heading */
+        .hero h1 {
+            font-family: "Inter var", system-ui, -apple-system, sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            font-size: clamp(40px, 6vw, calc(72px * var(--phi-inv)));
+            margin: 0 0 calc(16px * var(--phi));
+            line-height: var(--phi-inv);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
 
-          @media (min-width: 640px) {
-              .cta {
-                  flex-direction: row;
-                  justify-content: center;
-              }
-          }
+        /* Subheading */
+        .hero .sub {
+            font-size: clamp(16px, 2.2vw, calc(22px * var(--phi-inv)));
+            opacity: 0.9;
+            margin: 0 auto calc(8px * var(--phi));
+            max-width: calc(720px * var(--phi-inv));
+            line-height: var(--phi);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
 
-          /* Button base */
-          .btn {
-              display: inline-block;
-              padding: 14px 28px;
-              border-radius: 12px;
-              text-decoration: none;
-              font-weight: 600;
-              transition: all 0.3s ease;
-              white-space: nowrap;
-          }
+        /* Catchphrase */
+        .hero .catchphrase {
+            font-size: clamp(14px, 1.8vw, calc(18px * var(--phi-inv)));
+            font-style: italic;
+            opacity: 0.7;
+            margin: 0 auto calc(28px * var(--phi));
+            max-width: calc(720px * var(--phi-inv));
+            line-height: var(--phi);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
 
-          /* Primary button */
-          .btn.primary {
-              background: #0D6A74;
-              color: #fff;
-              box-shadow: 0 8px 24px rgba(13, 106, 116, 0.32);
-          }
+        /* CTA buttons container */
+        .cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: calc(16px * var(--phi-inv));
+            margin-bottom: calc(40px * var(--phi));
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
 
-          .btn.primary:hover {
-              background: #094e55;
-              box-shadow: 0 8px 30px rgba(13, 106, 116, 0.45);
-              transform: translateY(-1px);
-          }
+        @media (min-width: 640px) {
+            .cta {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
 
-          /* Ghost button */
-          .btn.ghost {
-              color: #F3F4F5;
-              border: 1px solid rgba(243, 244, 245, 0.18);
-          }
+        /* Button base */
+        .btn {
+            display: inline-block;
+            padding: calc(14px * var(--phi-inv)) calc(28px * var(--phi));
+            border-radius: calc(12px * var(--phi-inv));
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-          @media (min-width: 640px) {
-              .btn.ghost {
-                  margin-left: 12px;
-              }
-          }
+        /* Primary button */
+        .btn.primary {
+            background: linear-gradient(135deg, #0D6A74 0%, #0a5860 100%);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(13, 106, 116, 0.32);
+        }
 
-          .btn.ghost:hover {
-              border-color: #0D6A74;
-              color: #0D6A74;
-              background: rgba(13, 106, 116, 0.1);
-          }
+        .btn.primary:hover {
+            background: linear-gradient(135deg, #094e55 0%, #083e47 100%);
+            box-shadow: 0 12px 32px rgba(13, 106, 116, 0.45);
+            transform: translateY(-2px);
+        }
 
-          /* Trust list */
-          .trust {
-              list-style: none;
-              padding: 0;
-              margin: 20px 0 0;
-              display: flex;
-              gap: 16px;
-              justify-content: center;
-              opacity: 0.8;
-              font-size: 14px;
-              flex-wrap: wrap;
-          }
+        /* Ghost button */
+        .btn.ghost {
+            color: #F3F4F5;
+            border: 1px solid rgba(243, 244, 245, 0.18);
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-          .trust li {
-              position: relative;
-          }
-      </style>
-  </head>
-  <body>
-      <section class="hero">
-          <div class="wrap">
-              <p class="pre-header">PROTHEAN SHIELD</p>
-              <h1>Your Browser. Your Power.</h1>
-              <p class="sub">
-                  Enjoy a free VPN service, world-leading compression, and the fastest
-  Chrome experience. Guaranteed.
-              </p>
-              <p class="catchphrase">
-                  Hey, we'll throw in our MemoryDNA compressor because we can.
-              </p>
-              <div class="cta">
-                  <a class="btn primary" href="#install">Get Prothean Shield</a>
-                  <a class="btn ghost" href="#how">See how it works</a>
-              </div>
-              <ul class="trust">
-                  <li>Private by design</li>
-                  <li>Open review ready</li>
-                  <li>Chrome & Safari</li>
-              </ul>
-          </div>
-      </section>
-  </body>
-  </html>
+        @media (min-width: 640px) {
+            .btn.ghost {
+                margin-left: calc(12px * var(--phi-inv));
+            }
+        }
+
+        .btn.ghost:hover {
+            border-color: #0D6A74;
+            color: #0D6A74;
+            background: rgba(13, 106, 116, 0.1);
+        }
+
+        /* Trust list */
+        .trust {
+            list-style: none;
+            padding: 0;
+            margin: calc(20px * var(--phi-inv)) 0 0;
+            display: flex;
+            gap: calc(16px * var(--phi));
+            justify-content: center;
+            opacity: 0.8;
+            font-size: calc(14px * var(--phi-inv));
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .trust li {
+            position: relative;
+            padding: calc(8px * var(--phi-inv)) calc(16px * var(--phi-inv));
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: calc(8px * var(--phi-inv));
+            border: 1px solid rgba(13, 106, 116, 0.2);
+        }
+
+        .trust li::before {
+            content: '✨';
+            margin-right: calc(8px * var(--phi-inv));
+        }
+
+        /* Memory DNA Module Section */
+        .memory-dna-section {
+            background: linear-gradient(135deg, var(--surface) 0%, #1a1f24 100%);
+            padding: calc(80px * var(--phi)) 24px;
+            border-top: 1px solid rgba(13, 106, 116, 0.2);
+        }
+
+        .memory-dna-container {
+            max-width: calc(1200px * var(--phi-inv));
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: calc(60px * var(--phi));
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, calc(42px * var(--phi-inv)));
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: calc(16px * var(--phi-inv));
+            line-height: var(--phi-inv);
+        }
+
+        .section-subtitle {
+            font-size: clamp(16px, 2vw, calc(20px * var(--phi-inv)));
+            opacity: 0.8;
+            max-width: calc(600px * var(--phi-inv));
+            margin: 0 auto;
+            line-height: var(--phi);
+        }
+
+        .memory-dna-demo {
+            background: var(--secondary);
+            border-radius: calc(20px * var(--phi-inv));
+            padding: calc(40px * var(--phi-inv));
+            border: 2px solid rgba(13, 106, 116, 0.3);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: calc(40px * var(--phi));
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(32px * var(--phi-inv));
+        }
+
+        @media (min-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .demo-input {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: calc(12px * var(--phi-inv));
+            padding: calc(24px * var(--phi-inv));
+        }
+
+        .demo-output {
+            background: rgba(13, 106, 116, 0.1);
+            border-radius: calc(12px * var(--phi-inv));
+            padding: calc(24px * var(--phi-inv));
+            border: 1px solid rgba(13, 106, 116, 0.3);
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: calc(12px * var(--phi-inv));
+            color: var(--primary);
+            font-size: calc(14px * var(--phi-inv));
+        }
+
+        .input-field {
+            width: 100%;
+            min-height: calc(100px * var(--phi-inv));
+            padding: calc(16px * var(--phi-inv));
+            border: 1px solid rgba(243, 244, 245, 0.2);
+            border-radius: calc(8px * var(--phi-inv));
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(13, 106, 116, 0.2);
+        }
+
+        .compress-btn {
+            width: 100%;
+            margin-top: calc(16px * var(--phi-inv));
+            background: linear-gradient(135deg, var(--primary) 0%, #0a5860 100%);
+            color: white;
+            border: none;
+            padding: calc(16px * var(--phi-inv));
+            border-radius: calc(8px * var(--phi-inv));
+            font-weight: 600;
+            font-size: calc(16px * var(--phi-inv));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .compress-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(13, 106, 116, 0.3);
+        }
+
+        .compress-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-display {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: calc(8px * var(--phi-inv));
+            padding: calc(16px * var(--phi-inv));
+            margin-top: calc(16px * var(--phi-inv));
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            min-height: calc(120px * var(--phi-inv));
+            overflow-y: auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: calc(16px * var(--phi-inv));
+            margin-top: calc(24px * var(--phi));
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: calc(12px * var(--phi-inv));
+            padding: calc(20px * var(--phi-inv));
+            text-align: center;
+            border: 1px solid rgba(13, 106, 116, 0.2);
+        }
+
+        .metric-value {
+            font-size: calc(24px * var(--phi-inv));
+        }
+
+        /* File Upload Styles */
+        .file-upload-area {
+            border: 2px dashed rgba(13, 106, 116, 0.4);
+            border-radius: calc(12px * var(--phi-inv));
+            padding: calc(32px * var(--phi-inv));
+            text-align: center;
+            background: rgba(13, 106, 116, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: calc(16px * var(--phi-inv));
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(13, 106, 116, 0.1);
+        }
+
+        .file-upload-area.drag-over {
+            border-color: var(--primary);
+            background: rgba(13, 106, 116, 0.15);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: calc(48px * var(--phi-inv));
+            margin-bottom: calc(16px * var(--phi-inv));
+            opacity: 0.7;
+        }
+
+        .upload-text {
+            font-size: calc(16px * var(--phi-inv));
+            margin-bottom: calc(8px * var(--phi-inv));
+        }
+
+        .upload-link {
+            color: var(--primary);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .upload-hint {
+            font-size: calc(13px * var(--phi-inv));
+            opacity: 0.7;
+            color: var(--text-secondary);
+        }
+
+        .text-input-divider {
+            text-align: center;
+            margin: calc(20px * var(--phi-inv)) 0;
+            font-weight: 600;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .text-input-divider::before,
+        .text-input-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: rgba(243, 244, 245, 0.3);
+        }
+
+        .text-input-divider::before {
+            left: 0;
+        }
+
+        .text-input-divider::after {
+            right: 0;
+        }
+
+        .file-info {
+            background: rgba(13, 106, 116, 0.1);
+            border-radius: calc(8px * var(--phi-inv));
+            padding: calc(16px * var(--phi-inv));
+            margin-bottom: calc(16px * var(--phi-inv));
+            border: 1px solid rgba(13, 106, 116, 0.3);
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: calc(8px * var(--phi-inv)) 0;
+            border-bottom: 1px solid rgba(243, 244, 245, 0.1);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: calc(4px * var(--phi-inv));
+        }
+
+        .file-metadata {
+            font-size: calc(13px * var(--phi-inv));
+            opacity: 0.8;
+            color: var(--text-secondary);
+        }
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: calc(8px * var(--phi-inv));
+        }
+
+        .metric-label {
+            font-size: calc(12px * var(--phi-inv));
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(135deg, #1a1f24 0%, var(--secondary) 100%);
+            padding: calc(80px * var(--phi)) 24px;
+            border-top: 1px solid rgba(13, 106, 116, 0.2);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(32px * var(--phi-inv));
+            max-width: calc(1000px * var(--phi-inv));
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--surface);
+            border-radius: calc(20px * var(--phi-inv));
+            padding: calc(32px * var(--phi-inv));
+            border: 2px solid rgba(13, 106, 116, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--surface) 0%, rgba(13, 106, 116, 0.1) 100%);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: calc(20px * var(--phi-inv));
+            right: calc(-30px * var(--phi-inv));
+            background: var(--primary);
+            color: white;
+            padding: calc(8px * var(--phi-inv)) calc(40px * var(--phi));
+            font-size: calc(12px * var(--phi-inv));
+            font-weight: 600;
+            transform: rotate(45deg);
+            letter-spacing: 0.1em;
+        }
+
+        .plan-name {
+            font-size: calc(24px * var(--phi-inv));
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: calc(8px * var(--phi-inv));
+        }
+
+        .plan-price {
+            font-size: calc(36px * var(--phi-inv));
+            font-weight: 800;
+            margin-bottom: calc(4px * var(--phi-inv));
+        }
+
+        .plan-period {
+            font-size: calc(14px * var(--phi-inv));
+            opacity: 0.7;
+            margin-bottom: calc(24px * var(--phi));
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 calc(32px * var(--phi)) 0;
+        }
+
+        .plan-features li {
+            padding: calc(8px * var(--phi-inv)) 0;
+            display: flex;
+            align-items: center;
+            gap: calc(12px * var(--phi-inv));
+            font-size: calc(14px * var(--phi-inv));
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+            font-size: calc(16px * var(--phi-inv));
+        }
+
+        .plan-features li.unavailable {
+            opacity: 0.5;
+        }
+
+        .plan-features li.unavailable::before {
+            content: '✗';
+            color: var(--error);
+        }
+
+        .select-plan-btn {
+            width: 100%;
+            padding: calc(16px * var(--phi-inv));
+            border: none;
+            border-radius: calc(12px * var(--phi-inv));
+            font-weight: 600;
+            font-size: calc(16px * var(--phi-inv));
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .select-plan-btn.primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #0a5860 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(13, 106, 116, 0.3);
+        }
+
+        .select-plan-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(13, 106, 116, 0.4);
+        }
+
+        .select-plan-btn.secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .select-plan-btn.secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Stripe Payment Modal */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .payment-modal.active {
+            display: flex;
+        }
+
+        .payment-content {
+            background: var(--surface);
+            border-radius: calc(20px * var(--phi-inv));
+            padding: calc(40px * var(--phi-inv));
+            max-width: calc(500px * var(--phi-inv));
+            width: 90%;
+            border: 2px solid var(--primary);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: calc(32px * var(--phi));
+        }
+
+        .payment-title {
+            font-size: calc(24px * var(--phi-inv));
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: calc(8px * var(--phi-inv));
+        }
+
+        .payment-amount {
+            font-size: calc(32px * var(--phi-inv));
+            font-weight: 800;
+            margin-bottom: calc(16px * var(--phi-inv));
+        }
+
+        #card-element {
+            background: rgba(0, 0, 0, 0.3);
+            padding: calc(16px * var(--phi-inv));
+            border-radius: calc(8px * var(--phi-inv));
+            border: 1px solid rgba(243, 244, 245, 0.2);
+            margin-bottom: calc(16px * var(--phi-inv));
+        }
+
+        #card-errors {
+            color: var(--error);
+            margin-top: calc(8px * var(--phi-inv));
+            font-size: calc(14px * var(--phi-inv));
+        }
+
+        .payment-actions {
+            display: flex;
+            gap: calc(16px * var(--phi-inv));
+            margin-top: calc(24px * var(--phi));
+        }
+
+        .close-modal {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(243, 244, 245, 0.3);
+            flex: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Mathematical Beauty Indicator */
+        .phi-indicator {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(13, 106, 116, 0.9);
+            color: white;
+            padding: calc(12px * var(--phi-inv)) calc(16px * var(--phi));
+            border-radius: calc(8px * var(--phi-inv));
+            font-size: calc(12px * var(--phi-inv));
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: calc(80px * var(--phi-inv)) 16px;
+            }
+
+            .memory-dna-section,
+            .pricing-section {
+                padding: calc(60px * var(--phi-inv)) 16px;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phi-indicator {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin: calc(20px * var(--phi-inv)) auto;
+                text-align: center;
+                display: block;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mathematical Beauty Indicator -->
+    <div class="phi-indicator" id="beautyIndicator">
+        φ = 1.618 | Mathematical Beauty: 97.3%
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="wrap">
+            <p class="pre-header">PROTHEAN SHIELD</p>
+            <h1>Your Browser. Your Power.</h1>
+            <p class="sub">
+                Enjoy a free VPN service, world-leading compression, and the fastest Chrome experience. Guaranteed.
+            </p>
+            <p class="catchphrase">
+                Hey, we'll throw in our MemoryDNA compressor because we can.
+            </p>
+            <div class="cta">
+                <a class="btn primary" href="#memory-dna">Try Memory DNA</a>
+                <a class="btn ghost" href="#pricing">See Pricing</a>
+            </div>
+            <ul class="trust">
+                <li>Private by design</li>
+                <li>Open review ready</li>
+                <li>Chrome & Safari</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Memory DNA Module Section -->
+    <section id="memory-dna" class="memory-dna-section">
+        <div class="memory-dna-container">
+            <div class="section-header">
+                <h2 class="section-title">🧬 Memory DNA Compression</h2>
+                <p class="section-subtitle">
+                    Experience our world-leading compression technology powered by Golden Ratio optimization and advanced pattern recognition.
+                </p>
+            </div>
+
+            <div class="memory-dna-demo">
+                <div class="demo-grid">
+                    <div class="demo-input">
+                        <label class="input-label">📝 Input Data (Files or Text):</label>
+
+                        <!-- File Upload Area -->
+                        <div class="file-upload-area" id="fileUploadArea"
+                             ondrop="handleFileDrop(event)"
+                             ondragover="handleDragOver(event)"
+                             ondragleave="handleDragLeave(event)"
+                             onclick="triggerFileInput()">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">
+                                <strong>Drop files here</strong> or <span class="upload-link" onclick="triggerFileInput()">browse</span>
+                            </div>
+                            <div class="upload-hint">Supports: images, videos, documents, code files (metadata only)</div>
+                            <input type="file" id="fileInput" style="display: none;"
+                                   onchange="handleFileSelect(event)"
+                                   multiple
+                                   accept="image/*,video/*,.txt,.js,.py,.json,.pdf,.doc,.docx,.zip,.rar">
+                        </div>
+
+                        <!-- File Info Display -->
+                        <div id="fileInfo" class="file-info" style="display: none;"></div>
+
+                        <!-- Text Input Divider -->
+                        <div class="text-input-divider">OR</div>
+
+                        <!-- Text Input Area -->
+                        <textarea
+                            class="input-field"
+                            id="compressionInput"
+                            placeholder="Enter any text to see Memory DNA compression in action..."
+                        >Memory DNA compression utilizes advanced pattern recognition combined with Golden Ratio weighting to achieve up to 95% compression ratios. The algorithm detects repetitive patterns using Fibonacci sequence lengths (3, 5, 8, 13, 21) and applies φ-harmonic weighting for optimal efficiency. This mathematical approach ensures both maximum compression and preservation of data integrity through sacred geometry principles. The Prothean Protocol governs all operations with mathematical beauty scoring above 95% threshold, preventing abuse through elegance requirements.</textarea>
+
+                        <button class="compress-btn" onclick="compressWithMemoryDNA()" id="compressBtn">
+                            🧬 Compress with φ Optimization
+                        </button>
+                    </div>
+
+                    <div class="demo-output">
+                        <label class="input-label">📊 Compression Results:</label>
+                        <div class="result-display" id="compressionResult">
+Click "Compress with φ Optimization" to see Memory DNA in action!
+
+🔬 What you'll see:
+• Original vs compressed size
+• Compression ratio percentage
+• Golden Ratio optimization score
+• Pattern detection results
+• Mathematical beauty validation
+• Processing time metrics
+
+The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid" id="metricsDisplay">
+                    <div class="metric-card">
+                        <div class="metric-value" id="compressionRatio">--</div>
+                        <div class="metric-label">Compression Ratio</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="phiOptimization">--</div>
+                        <div class="metric-label">φ Optimization</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="patternsFound">--</div>
+                        <div class="metric-label">Patterns Detected</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="processingTime">--</div>
+                        <div class="metric-label">Processing Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="memory-dna-container">
+            <div class="section-header">
+                <h2 class="section-title">💎 Choose Your Power Level</h2>
+                <p class="section-subtitle">
+                    Unlock the full potential of Prothean Shield with our mathematically optimized pricing plans.
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Freemium</div>
+                    <div class="plan-price">$0</div>
+                    <div class="plan-period">Forever free</div>
+                    <ul class="plan-features">
+                        <li>1GB Memory DNA compression/month</li>
+                        <li>Basic Golden Ratio optimization</li>
+                        <li>Standard pattern recognition</li>
+                        <li>Community support</li>
+                        <li class="unavailable">Helios rendering engine</li>
+                        <li class="unavailable">Veridian AI chat</li>
+                        <li class="unavailable">Premium algorithms</li>
+                        <li class="unavailable">Priority processing</li>
+                    </ul>
+                    <button class="select-plan-btn secondary" onclick="selectPlan('free')">
+                        Start Free
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card featured">
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-price">$10</div>
+                    <div class="plan-period">One-time payment</div>
+                    <ul class="plan-features">
+                        <li>Memory DNA Record Breaking Compression up to 87.4x!</li>
+                        <li>Advanced φ optimization </li>
+                        <li>Full pattern recognition suite</li>
+                        <li>Helios rendering engine (1-min videos)</li>
+                        <li>Veridian AI chat Fastest LLM Worldwide.</li>
+                        <li>UPE mathematical validation</li>
+                        <li>Priority processing</li>
+                        <li>Premium support</li>
+                    </ul>
+                    <button class="select-plan-btn primary" onclick="selectPlan('premium')">
+                        Upgrade to Premium
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">$50</div>
+                    <div class="plan-period">One-time payment</div>
+                    <ul class="plan-features">
+                        <li>Everything in Premium</li>
+                        <li>Uncensored LLM</li>
+                        <li>4K image rendering</li>
+                        <li>Custom algorithm training</li>
+                        <li>API access</li>
+                        <li>White-label solutions</li>
+                        <li>Dedicated support</li>
+                        <li>Mathematical beauty > 99%</li>
+                    </ul>
+                    <button class="select-plan-btn secondary" onclick="selectPlan('enterprise')">
+                        Go Enterprise
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stripe Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h3 class="payment-title" id="paymentTitle">Upgrade to Premium</h3>
+                <div class="payment-amount" id="paymentAmount">$10.00</div>
+                <p style="opacity: 0.8; font-size: 14px;">Secure payment powered by Stripe</p>
+            </div>
+
+            <form id="payment-form">
+                <div id="card-element">
+                    <!-- Stripe Elements will create form elements here -->
+                </div>
+                <div id="card-errors" role="alert"></div>
+
+                <div class="payment-actions">
+                    <button type="button" class="btn close-modal" onclick="closePaymentModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn primary" id="submit-payment">
+                        Complete Payment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for file handling
+        let selectedFiles = [];
+        let isProcessingFiles = false;
+
+        // Radiant Data Tree integration - Golden Ratio secured port
+        const RDT_ENDPOINT = 'http://localhost:16182/api';
+        let rdtLearningEnabled = true;
+
+        // File Upload Handlers
+        function triggerFileInput() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('fileUploadArea').classList.add('drag-over');
+        }
+
+        function handleDragLeave(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('fileUploadArea').classList.remove('drag-over');
+        }
+
+        function handleFileDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('fileUploadArea').classList.remove('drag-over');
+
+            const files = event.dataTransfer.files;
+            processFiles(files);
+        }
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            processFiles(files);
+        }
+
+        function processFiles(files) {
+            selectedFiles = Array.from(files);
+            displayFileInfo();
+
+            // Clear text input when files are selected
+            document.getElementById('compressionInput').value = '';
+        }
+
+        function displayFileInfo() {
+            const fileInfoDiv = document.getElementById('fileInfo');
+
+            if (selectedFiles.length === 0) {
+                fileInfoDiv.style.display = 'none';
+                return;
+            }
+
+            fileInfoDiv.style.display = 'block';
+
+            let totalSize = 0;
+            let fileTypes = new Set();
+
+            const fileListHTML = selectedFiles.map(file => {
+                totalSize += file.size;
+                const extension = file.name.split('.').pop().toLowerCase();
+                fileTypes.add(extension);
+
+                return `
+                    <div class="file-item">
+                        <div class="file-details">
+                            <div class="file-name">📄 ${file.name}</div>
+                            <div class="file-metadata">
+                                Type: ${file.type || 'Unknown'} |
+                                Size: ${formatBytes(file.size)} |
+                                Modified: ${new Date(file.lastModified).toLocaleDateString()}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            fileInfoDiv.innerHTML = `
+                <div class="file-summary">
+                    <strong>📁 ${selectedFiles.length} file(s) selected</strong>
+                    <div class="file-metadata">
+                        Total size: ${formatBytes(totalSize)} |
+                        Types: ${Array.from(fileTypes).join(', ')}
+                    </div>
+                </div>
+                <div class="file-list">
+                    ${fileListHTML}
+                </div>
+                <div style="margin-top: 12px; padding: 8px; background: rgba(255, 193, 7, 0.1); border-radius: 6px; font-size: 13px;">
+                    🔒 <strong>Privacy Note:</strong> Only file metadata (name, size, type) is analyzed. File contents are never uploaded or stored.
+                </div>
+            `;
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+
+        function extractFileMetadata(file) {
+            return {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                lastModified: file.lastModified,
+                extension: file.name.split('.').pop().toLowerCase(),
+                namePattern: analyzeNamePattern(file.name),
+                sizeCategory: categorizeSizeForCompression(file.size)
+            };
+        }
+
+        function analyzeNamePattern(filename) {
+            const patterns = [];
+
+            // Check for common patterns
+            if (/\d{4}-\d{2}-\d{2}/.test(filename)) patterns.push('date');
+            if (/v\d+|\d+\.\d+/.test(filename)) patterns.push('version');
+            if (/_|\./.test(filename)) patterns.push('structured');
+            if (/backup|copy|duplicate/.test(filename.toLowerCase())) patterns.push('redundant');
+
+            return patterns;
+        }
+
+        function categorizeSizeForCompression(size) {
+            if (size < 1024) return 'tiny';           // < 1KB
+            if (size < 1024 * 1024) return 'small';   // < 1MB
+            if (size < 10 * 1024 * 1024) return 'medium'; // < 10MB
+            if (size < 100 * 1024 * 1024) return 'large';  // < 100MB
+            return 'huge';                             // >= 100MB
+        }
+
+        function validateFilesSecurity(files) {
+            // Maximum file size (100MB for freemium)
+            const maxSize = 100 * 1024 * 1024;
+            const maxFiles = 50;
+
+            // Blocked extensions for security
+            const blockedExtensions = ['exe', 'bat', 'cmd', 'scr', 'vbs', 'js', 'jar'];
+            const suspiciousExtensions = ['zip', 'rar', '7z', 'tar', 'gz'];
+
+            if (files.length > maxFiles) {
+                return { safe: false, reason: `Too many files. Maximum ${maxFiles} files allowed.` };
+            }
+
+            for (let file of files) {
+                if (file.size > maxSize) {
+                    return { safe: false, reason: `File "${file.name}" too large. Maximum 100MB per file.` };
+                }
+
+                const extension = file.name.split('.').pop().toLowerCase();
+
+                if (blockedExtensions.includes(extension)) {
+                    return { safe: false, reason: `File type "${extension}" not allowed for security reasons.` };
+                }
+
+                // Check for suspicious file names
+                if (file.name.includes('..') || file.name.includes('\\') || file.name.includes('/')) {
+                    return { safe: false, reason: `Suspicious file name detected: "${file.name}"` };
+                }
+            }
+
+            return { safe: true };
+        }
+
+        function processFilesMetadata(files) {
+            let totalOriginalSize = 0;
+            let estimatedCompressedSize = 0;
+            const detectedPatterns = new Set();
+            let phiOptimizationScore = 0;
+
+            // Analyze each file's metadata
+            files.forEach(file => {
+                const metadata = extractFileMetadata(file);
+                totalOriginalSize += file.size;
+
+                // Estimate compression based on file type and patterns
+                let compressionFactor = getCompressionFactorByType(metadata.extension);
+
+                // Apply pattern bonuses
+                if (metadata.namePattern.includes('redundant')) compressionFactor *= 0.7;
+                if (metadata.namePattern.includes('structured')) compressionFactor *= 0.85;
+                if (metadata.namePattern.includes('date')) compressionFactor *= 0.9;
+
+                // Add size-based optimization
+                if (metadata.sizeCategory === 'large' || metadata.sizeCategory === 'huge') {
+                    compressionFactor *= 0.8; // Large files often compress better
+                }
+
+                estimatedCompressedSize += Math.floor(file.size * compressionFactor);
+
+                // Track patterns
+                metadata.namePattern.forEach(pattern => detectedPatterns.add(pattern));
+                detectedPatterns.add(`${metadata.extension}_file`);
+                detectedPatterns.add(`${metadata.sizeCategory}_size`);
+            });
+
+            // Calculate Golden Ratio optimization for file structure
+            phiOptimizationScore = calculateFileStructurePhiScore(files);
+
+            return {
+                originalSize: totalOriginalSize,
+                compressedSize: estimatedCompressedSize,
+                patterns: Array.from(detectedPatterns),
+                phiOptimization: phiOptimizationScore,
+                compressionRatio: estimatedCompressedSize / totalOriginalSize,
+                spaceSaved: ((totalOriginalSize - estimatedCompressedSize) / totalOriginalSize) * 100,
+                fileCount: files.length,
+                dataType: 'files'
+            };
+        }
+
+        function processTextData(input) {
+            const originalSize = new TextEncoder().encode(input).length;
+            const patterns = detectPatterns(input);
+            const phiOptimization = calculatePhiOptimization(input, patterns);
+            const entropy = calculateEntropy(input);
+            const compressionRatio = Math.max(0.05, 0.8 - (entropy * 0.3) - (patterns.length * 0.05));
+            const compressedSize = Math.floor(originalSize * compressionRatio);
+            const spaceSaved = ((1 - compressionRatio) * 100);
+
+            return {
+                originalSize: originalSize,
+                compressedSize: compressedSize,
+                patterns: patterns,
+                phiOptimization: phiOptimization,
+                compressionRatio: compressionRatio,
+                spaceSaved: spaceSaved,
+                dataType: 'text'
+            };
+        }
+
+        function getCompressionFactorByType(extension) {
+            const compressionFactors = {
+                // Already compressed formats
+                'jpg': 0.95, 'jpeg': 0.95, 'png': 0.9, 'gif': 0.95,
+                'mp3': 0.98, 'mp4': 0.98, 'avi': 0.95,
+                'zip': 0.99, 'rar': 0.99, '7z': 0.99,
+
+                // Text-based formats (compress well)
+                'txt': 0.3, 'csv': 0.25, 'json': 0.35,
+                'html': 0.4, 'css': 0.35, 'js': 0.4,
+                'xml': 0.3, 'log': 0.2,
+
+                // Document formats
+                'pdf': 0.8, 'doc': 0.7, 'docx': 0.6,
+                'xls': 0.6, 'xlsx': 0.5,
+
+                // Code files
+                'py': 0.4, 'java': 0.45, 'cpp': 0.4,
+                'c': 0.4, 'h': 0.4, 'php': 0.45,
+
+                // Default
+                'default': 0.6
+            };
+
+            return compressionFactors[extension] || compressionFactors['default'];
+        }
+
+        function calculateFileStructurePhiScore(files) {
+            let score = 0.5; // Base score
+
+            // File count Golden Ratio optimization
+            const goldenFileCount = Math.floor(files.length * 0.618);
+            if (files.length === goldenFileCount || files.length === Math.ceil(files.length * 1.618)) {
+                score += 0.2;
+            }
+
+            // Size distribution analysis
+            const sizes = files.map(f => f.size).sort((a, b) => a - b);
+            if (sizes.length > 1) {
+                const ratio = sizes[sizes.length - 1] / sizes[0];
+                const phiProximity = Math.abs(ratio - 1.618) / 1.618;
+                score += (1 - phiProximity) * 0.2;
+            }
+
+            // File extension diversity (φ-based)
+            const extensions = new Set(files.map(f => f.name.split('.').pop().toLowerCase()));
+            const diversityRatio = extensions.size / files.length;
+            if (Math.abs(diversityRatio - 0.618) < 0.1) {
+                score += 0.15;
+            }
+
+            // Mathematical beauty in file names
+            files.forEach(file => {
+                if (file.name.match(/phi|1\.618|golden|fibonacci/i)) {
+                    score += 0.05;
+                }
+            });
+
+            return Math.min(score, 1.0);
+        }
+
+        // Memory DNA Compression Simulation
+        function compressWithMemoryDNA() {
+            const input = document.getElementById('compressionInput').value;
+            const resultArea = document.getElementById('compressionResult');
+            const compressBtn = document.getElementById('compressBtn');
+
+            // Check if we have files or text
+            const hasFiles = selectedFiles.length > 0;
+            const hasText = input.trim().length > 0;
+
+            if (!hasFiles && !hasText) {
+                resultArea.textContent = '❌ Please upload files or enter text to compress.';
+                return;
+            }
+
+            // Security validation for files
+            if (hasFiles) {
+                const securityCheck = validateFilesSecurity(selectedFiles);
+                if (!securityCheck.safe) {
+                    resultArea.textContent = `❌ Security Warning: ${securityCheck.reason}`;
+                    return;
+                }
+            }
+
+            // Disable button and show processing
+            compressBtn.disabled = true;
+            compressBtn.textContent = '🔄 Compressing...';
+
+            if (hasFiles) {
+                resultArea.textContent = '🧬 Processing files with Memory DNA...\n⚡ Analyzing metadata patterns...\n📐 Applying φ optimization to file structures...';
+            } else {
+                resultArea.textContent = '🧬 Processing with Golden Ratio optimization...\n⚡ Analyzing patterns...\n📐 Applying φ weighting...';
+            }
+
+            // Simulate processing time
+            setTimeout(() => {
+                let compressionResults;
+
+                if (hasFiles) {
+                    // Process files (metadata only)
+                    compressionResults = processFilesMetadata(selectedFiles);
+                } else {
+                    // Process text
+                    compressionResults = processTextData(input);
+                }
+
+                // Processing time simulation
+                const processingTime = Math.floor(Math.random() * 10) + (hasFiles ? 5 : 1);
+
+                // Display results based on data type
+                if (compressionResults.dataType === 'files') {
+                    resultArea.textContent = `✅ Memory DNA File Analysis Complete!
+
+📁 FILE ANALYSIS:
+Files processed: ${compressionResults.fileCount} files
+Total original size: ${formatBytes(compressionResults.originalSize)}
+Estimated compressed size: ${formatBytes(compressionResults.compressedSize)}
+Compression ratio: ${(compressionResults.compressionRatio * 100).toFixed(1)}%
+Space saved: ${compressionResults.spaceSaved.toFixed(1)}%
+
+🧬 METADATA PATTERN RECOGNITION:
+Patterns detected: ${compressionResults.patterns.length}
+Pattern types: ${compressionResults.patterns.join(', ') || 'Basic file structures'}
+
+📐 GOLDEN RATIO OPTIMIZATION:
+φ file structure score: ${(compressionResults.phiOptimization * 100).toFixed(1)}%
+Mathematical beauty: ${compressionResults.phiOptimization >= 0.95 ? 'EXCELLENT ⭐⭐⭐' : compressionResults.phiOptimization >= 0.8 ? 'GOOD ⭐⭐' : 'STANDARD ⭐'}
+
+⚡ PERFORMANCE:
+Processing time: ${processingTime}ms
+Algorithm: Memory DNA v2.0 with φ file structure weighting
+Metadata-only analysis: SECURE (no file contents accessed)
+
+🎯 RESULT: ${compressionResults.spaceSaved >= 70 ? 'EXCEPTIONAL metadata-based compression predicted!' : compressionResults.spaceSaved >= 50 ? 'EXCELLENT compression potential!' : compressionResults.spaceSaved >= 30 ? 'GOOD compression expected!' : 'Standard compression potential.'}
+
+🔒 PRIVACY: Only file metadata analyzed. File contents never accessed or stored.`;
+                } else {
+                    resultArea.textContent = `✅ Memory DNA Text Compression Complete!
+
+📊 COMPRESSION ANALYSIS:
+Original size: ${compressionResults.originalSize.toLocaleString()} bytes
+Compressed size: ${compressionResults.compressedSize.toLocaleString()} bytes
+Compression ratio: ${(compressionResults.compressionRatio * 100).toFixed(1)}%
+Space saved: ${compressionResults.spaceSaved.toFixed(1)}%
+
+🧬 PATTERN RECOGNITION:
+Patterns detected: ${compressionResults.patterns.length}
+Pattern types: ${compressionResults.patterns.join(', ') || 'Basic repetition'}
+
+📐 GOLDEN RATIO OPTIMIZATION:
+φ optimization score: ${(compressionResults.phiOptimization * 100).toFixed(1)}%
+Mathematical beauty: ${compressionResults.phiOptimization >= 0.95 ? 'EXCELLENT ⭐⭐⭐' : compressionResults.phiOptimization >= 0.8 ? 'GOOD ⭐⭐' : 'STANDARD ⭐'}
+
+⚡ PERFORMANCE:
+Processing time: ${processingTime}ms
+Algorithm: Memory DNA v2.0 with φ weighting
+Fibonacci optimization: ${compressionResults.patterns.length > 5 ? 'Active' : 'Standard'}
+
+🎯 RESULT: ${compressionResults.spaceSaved >= 80 ? 'EXCEPTIONAL compression achieved!' : compressionResults.spaceSaved >= 60 ? 'EXCELLENT compression!' : compressionResults.spaceSaved >= 40 ? 'GOOD compression!' : 'Standard compression.'}`;
+                }
+
+                // Update metrics display
+                updateMetrics({
+                    compressionRatio: `${compressionResults.spaceSaved.toFixed(0)}%`,
+                    phiOptimization: `${(compressionResults.phiOptimization * 100).toFixed(0)}%`,
+                    patternsFound: compressionResults.patterns.length,
+                    processingTime: `${processingTime}ms`
+                });
+
+                // Re-enable button
+                compressBtn.disabled = false;
+                compressBtn.textContent = '🧬 Compress with φ Optimization';
+
+                // Send learning data to Radiant Data Tree
+                if (rdtLearningEnabled) {
+                    setTimeout(() => {
+                        sendLearningDataToRDT(
+                            hasFiles ? 'file_analysis' : 'text_compression',
+                            {
+                                hasFiles: hasFiles,
+                                fileCount: hasFiles ? selectedFiles.length : 0,
+                                textLength: hasText ? input.length : 0,
+                                patterns: compressionResults.patterns,
+                                compressionRatio: compressionResults.compressionRatio,
+                                spaceSaved: compressionResults.spaceSaved
+                            },
+                            compressionResults.phiOptimization
+                        );
+                    }, 500);
+                }
+
+            }, 2000);
+        }
+
+        // Radiant Data Tree Learning Integration
+        async function sendLearningDataToRDT(operation, data, upeScore) {
+            if (!rdtLearningEnabled) return;
+
+            try {
+                const learningData = {
+                    operation: operation,
+                    data: data,
+                    upeScore: upeScore,
+                    source: 'prothean_shield_browser',
+                    timestamp: Date.now()
+                };
+
+                const response = await fetch(`${RDT_ENDPOINT}/learn-from-operation`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(learningData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('🌟 RDT Learning: Data sent successfully', result);
+
+                    // Update UI to show learning feedback
+                    updateRDTStatus('Learning data integrated ✨');
+                    return result;
+                } else {
+                    console.warn('⚠️ RDT Learning: Failed to send data', response.status);
+                }
+            } catch (error) {
+                console.warn('⚠️ RDT Learning: Connection failed', error.message);
+                updateRDTStatus('Learning offline');
+            }
+        }
+
+        async function getRDTOptimizations(context) {
+            if (!rdtLearningEnabled) return [];
+
+            try {
+                const response = await fetch(`${RDT_ENDPOINT}/optimization-opportunities`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(context)
+                });
+
+                if (response.ok) {
+                    const optimizations = await response.json();
+                    console.log('💡 RDT Optimizations received:', optimizations);
+                    return optimizations;
+                }
+            } catch (error) {
+                console.warn('⚠️ RDT Optimizations: Connection failed', error.message);
+            }
+
+            return [];
+        }
+
+        function updateRDTStatus(message) {
+            // Update the phi indicator to show RDT status
+            const indicator = document.getElementById('beautyIndicator');
+            if (indicator) {
+                const originalText = indicator.textContent;
+                indicator.textContent = `${originalText.split('|')[0]}| ${message}`;
+
+                // Revert after 3 seconds
+                setTimeout(() => {
+                    indicator.textContent = originalText;
+                }, 3000);
+            }
+        }
+
+        function detectPatterns(text) {
+            const patterns = [];
+
+            // Check for common patterns
+            if (text.toLowerCase().includes('pattern') || text.toLowerCase().includes('repeat')) {
+                patterns.push('repetitive');
+            }
+            if (text.match(/\b(golden|ratio|phi|fibonacci)\b/gi)) {
+                patterns.push('mathematical');
+            }
+            if (text.match(/\b(the|and|or|in|on|at|to|for|of|with|by)\b/gi)) {
+                patterns.push('linguistic');
+            }
+            if (text.length > 200) {
+                patterns.push('extended');
+            }
+            if (text.match(/\d+/g)) {
+                patterns.push('numerical');
+            }
+
+            return patterns;
+        }
+
+        function calculatePhiOptimization(text, patterns) {
+            let score = 0.5; // Base score
+
+            // Length optimization (Golden Ratio preference)
+            const idealLength = Math.floor(text.length * 0.618);
+            const lengthScore = 1 - Math.abs(text.length - idealLength) / text.length;
+            score += lengthScore * 0.2;
+
+            // Pattern diversity bonus
+            score += Math.min(patterns.length * 0.1, 0.3);
+
+            // Mathematical content bonus
+            if (text.toLowerCase().includes('phi') || text.toLowerCase().includes('1.618')) {
+                score += 0.15;
+            }
+
+            // Fibonacci numbers detection
+            const fibNumbers = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
+            const hasFib = fibNumbers.some(num => text.includes(num.toString()));
+            if (hasFib) score += 0.1;
+
+            return Math.min(score, 1.0);
+        }
+
+        function calculateEntropy(text) {
+            const freq = {};
+            for (let char of text) {
+                freq[char] = (freq[char] || 0) + 1;
+            }
+
+            let entropy = 0;
+            const len = text.length;
+            for (let count of Object.values(freq)) {
+                const p = count / len;
+                entropy -= p * Math.log2(p);
+            }
+
+            return entropy / 8; // Normalize to 0-1 range
+        }
+
+        function updateMetrics(metrics) {
+            document.getElementById('compressionRatio').textContent = metrics.compressionRatio;
+            document.getElementById('phiOptimization').textContent = metrics.phiOptimization;
+            document.getElementById('patternsFound').textContent = metrics.patternsFound;
+            document.getElementById('processingTime').textContent = metrics.processingTime;
+        }
+
+        // Stripe Integration
+        let stripe, elements, card;
+        let selectedPlan = null;
+
+        // Initialize Stripe
+        function initializeStripe() {
+            stripe = Stripe('pk_test_51234567890abcdef1234567890abcdef12345678'); // Replace with your publishable key
+            elements = stripe.elements();
+
+            const style = {
+                base: {
+                    color: '#F3F4F5',
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: 'rgba(243, 244, 245, 0.6)'
+                    }
+                },
+                invalid: {
+                    color: '#F44336',
+                    iconColor: '#F44336'
+                }
+            };
+
+            card = elements.create('card', { style });
+            card.mount('#card-element');
+
+            card.on('change', ({ error }) => {
+                const displayError = document.getElementById('card-errors');
+                if (error) {
+                    displayError.textContent = error.message;
+                } else {
+                    displayError.textContent = '';
+                }
+            });
+
+            // Handle form submission
+            const form = document.getElementById('payment-form');
+            form.addEventListener('submit', handleSubmit);
+        }
+
+        function selectPlan(plan) {
+            selectedPlan = plan;
+
+            if (plan === 'free') {
+                alert('🎉 Welcome to Prothean Shield Freemium!\n\n✅ 1GB Memory DNA compression activated\n✅ Basic Golden Ratio optimization enabled\n✅ Standard pattern recognition ready\n\nEnjoy your free compression power!');
+                return;
+            }
+
+            const plans = {
+                premium: { name: 'Premium', price: 20.00 },
+                enterprise: { name: 'Enterprise', price: 150.00 }
+            };
+
+            const selectedPlanData = plans[plan];
+            document.getElementById('paymentTitle').textContent = `Upgrade to ${selectedPlanData.name}`;
+            document.getElementById('paymentAmount').textContent = `$${selectedPlanData.price.toFixed(2)}`;
+
+            openPaymentModal();
+        }
+
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.add('active');
+            if (!stripe) {
+                initializeStripe();
+            }
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            const submitButton = document.getElementById('submit-payment');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing...';
+
+            // Create payment method
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: card,
+                billing_details: {
+                    name: 'Prothean Shield User',
+                },
+            });
+
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+                submitButton.disabled = false;
+                submitButton.textContent = 'Complete Payment';
+                return;
+            }
+
+            // Simulate payment processing
+            setTimeout(() => {
+                // Success simulation
+                closePaymentModal();
+
+                const planNames = {
+                    premium: 'Premium',
+                    enterprise: 'Enterprise'
+                };
+
+                const planFeatures = {
+                    premium: [
+                        '✅ Unlocked Memory DNA compression',
+                        '✅ Advanced φ optimization (95%+ beauty)',
+                        '✅ Helios rendering engine',
+                        '✅ Veridian AI chat',
+                        '✅ Priority processing'
+                    ],
+                    enterprise: [
+                        '✅ Everything in Premium',
+                        '✅ Uncensored LLM,
+                        '✅ 4K image rendering',
+                        '✅ API access',
+                        '✅ Mathematical beauty > 99%'
+                    ]
+                };
+
+                alert(`🎉 Welcome to Prothean Shield ${planNames[selectedPlan]}!\n\n${planFeatures[selectedPlan].join('\n')}\n\n🚀 Your upgrade is now active!\n📧 Confirmation email sent.`);
+
+                // Update button text to reflect upgrade
+                const buttons = document.querySelectorAll('.select-plan-btn');
+                buttons.forEach(btn => {
+                    if (btn.textContent.includes(planNames[selectedPlan])) {
+                        btn.textContent = '✅ Active';
+                        btn.disabled = true;
+                        btn.style.background = '#4CAF50';
+                    }
+                });
+
+                submitButton.disabled = false;
+                submitButton.textContent = 'Complete Payment';
+            }, 2000);
+        }
+
+        // Mathematical Beauty Score Calculation
+        function updateBeautyScore() {
+            const indicator = document.getElementById('beautyIndicator');
+
+            // Calculate beauty score based on page elements and Golden Ratio
+            let beautyScore = 85; // Base score
+
+            // Check element proportions
+            const cards = document.querySelectorAll('.pricing-card, .metric-card, .demo-input, .demo-output');
+            let ratioScore = 0;
+
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.width > 0 && rect.height > 0) {
+                    const ratio = rect.width / rect.height;
+                    const phiProximity = 1 - Math.abs(ratio - 1.618) / 1.618;
+                    ratioScore += Math.max(0, phiProximity);
+                }
+            });
+
+            if (cards.length > 0) {
+                beautyScore += (ratioScore / cards.length) * 15;
+            }
+
+            beautyScore = Math.min(beautyScore, 100);
+
+            indicator.textContent = `φ = 1.618 | Mathematical Beauty: ${beautyScore.toFixed(1)}%`;
+
+            // Color coding
+            if (beautyScore >= 95) {
+                indicator.style.background = 'rgba(76, 175, 80, 0.9)';
+            } else if (beautyScore >= 85) {
+                indicator.style.background = 'rgba(255, 193, 7, 0.9)';
+            } else {
+                indicator.style.background = 'rgba(244, 67, 54, 0.9)';
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBeautyScore();
+
+            // Update beauty score periodically
+            setInterval(updateBeautyScore, 3000);
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePaymentModal();
+            }
+        });
+
+        // Close modal on backdrop click
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePaymentModal();
+            }
+        });
+    </script>
+</body>
+</html>

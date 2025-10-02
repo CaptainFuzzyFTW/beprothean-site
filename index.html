@@ -855,7 +855,7 @@ The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
     <section id="pricing" class="pricing-section">
         <div class="memory-dna-container">
             <div class="section-header">
-                <h2 class="section-title">💎 Choose Your Power Level</h2>
+                <h2 class="section-title">Choose Your Power Level</h2>
                 <p class="section-subtitle">
                     Unlock the full potential of Prothean Shield with our mathematically optimized pricing plans.
                 </p>
@@ -885,14 +885,14 @@ The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
                 <!-- Premium Plan -->
                 <div class="pricing-card featured">
                     <div class="plan-name">Premium</div>
-                    <div class="plan-price">$10</div>
-                    <div class="plan-period">One-time payment</div>
+                    <div class="plan-price">$15/month</div>
+                    <div class="plan-period">Per month</div>
                     <ul class="plan-features">
-                        <li>Memory DNA Record Breaking Compression up to 87.4x!</li>
+                        <li>Memory DNA compression up to 87.4x LOSSLESS!</li>
                         <li>Advanced φ optimization </li>
                         <li>Full pattern recognition suite</li>
-                        <li>Helios rendering engine (1-min videos)</li>
-                        <li>Veridian AI chat Fastest LLM Worldwide.</li>
+                        <li>Helios Engine 4k 96hz Video and Audio generator.</li>
+                        <li>Unfiltered and censor free.</li>
                         <li>UPE mathematical validation</li>
                         <li>Priority processing</li>
                         <li>Premium support</li>
@@ -905,8 +905,8 @@ The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
                 <!-- Enterprise Plan -->
                 <div class="pricing-card">
                     <div class="plan-name">Enterprise</div>
-                    <div class="plan-price">$50</div>
-                    <div class="plan-period">One-time payment</div>
+                    <div class="plan-price">$50/month</div>
+                    <div class="plan-period">Per month</div>
                     <ul class="plan-features">
                         <li>Everything in Premium</li>
                         <li>Uncensored LLM</li>
@@ -925,32 +925,7 @@ The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
         </div>
     </section>
 
-    <!-- Stripe Payment Modal -->
-    <div class="payment-modal" id="paymentModal">
-        <div class="payment-content">
-            <div class="payment-header">
-                <h3 class="payment-title" id="paymentTitle">Upgrade to Premium</h3>
-                <div class="payment-amount" id="paymentAmount">$10.00</div>
-                <p style="opacity: 0.8; font-size: 14px;">Secure payment powered by Stripe</p>
-            </div>
-
-            <form id="payment-form">
-                <div id="card-element">
-                    <!-- Stripe Elements will create form elements here -->
-                </div>
-                <div id="card-errors" role="alert"></div>
-
-                <div class="payment-actions">
-                    <button type="button" class="btn close-modal" onclick="closePaymentModal()">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn primary" id="submit-payment">
-                        Complete Payment
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <!-- Payment Modal Removed -->
 
     <script>
         // Global variables for file handling
@@ -958,7 +933,7 @@ The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
         let isProcessingFiles = false;
 
         // Radiant Data Tree integration - Golden Ratio secured port
-        const RDT_ENDPOINT = 'http://localhost:16182/api';
+        const RDT_ENDPOINT = 'https://beprothean.org/api';
         let rdtLearningEnabled = true;
 
         // File Upload Handlers
@@ -1057,471 +1032,6 @@ The algorithm uses φ = 1.618033988749895 for optimal pattern weighting.
             return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
         }
 
-        function extractFileMetadata(file) {
-            return {
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                lastModified: file.lastModified,
-                extension: file.name.split('.').pop().toLowerCase(),
-                namePattern: analyzeNamePattern(file.name),
-                sizeCategory: categorizeSizeForCompression(file.size)
-            };
-        }
-
-        function analyzeNamePattern(filename) {
-            const patterns = [];
-
-            // Check for common patterns
-            if (/\d{4}-\d{2}-\d{2}/.test(filename)) patterns.push('date');
-            if (/v\d+|\d+\.\d+/.test(filename)) patterns.push('version');
-            if (/_|\./.test(filename)) patterns.push('structured');
-            if (/backup|copy|duplicate/.test(filename.toLowerCase())) patterns.push('redundant');
-
-            return patterns;
-        }
-
-        function categorizeSizeForCompression(size) {
-            if (size < 1024) return 'tiny';           // < 1KB
-            if (size < 1024 * 1024) return 'small';   // < 1MB
-            if (size < 10 * 1024 * 1024) return 'medium'; // < 10MB
-            if (size < 100 * 1024 * 1024) return 'large';  // < 100MB
-            return 'huge';                             // >= 100MB
-        }
-
-        function validateFilesSecurity(files) {
-            // Maximum file size (100MB for freemium)
-            const maxSize = 100 * 1024 * 1024;
-            const maxFiles = 50;
-
-            // Blocked extensions for security
-            const blockedExtensions = ['exe', 'bat', 'cmd', 'scr', 'vbs', 'js', 'jar'];
-            const suspiciousExtensions = ['zip', 'rar', '7z', 'tar', 'gz'];
-
-            if (files.length > maxFiles) {
-                return { safe: false, reason: `Too many files. Maximum ${maxFiles} files allowed.` };
-            }
-
-            for (let file of files) {
-                if (file.size > maxSize) {
-                    return { safe: false, reason: `File "${file.name}" too large. Maximum 100MB per file.` };
-                }
-
-                const extension = file.name.split('.').pop().toLowerCase();
-
-                if (blockedExtensions.includes(extension)) {
-                    return { safe: false, reason: `File type "${extension}" not allowed for security reasons.` };
-                }
-
-                // Check for suspicious file names
-                if (file.name.includes('..') || file.name.includes('\\') || file.name.includes('/')) {
-                    return { safe: false, reason: `Suspicious file name detected: "${file.name}"` };
-                }
-            }
-
-            return { safe: true };
-        }
-
-        function processFilesMetadata(files) {
-            let totalOriginalSize = 0;
-            let estimatedCompressedSize = 0;
-            const detectedPatterns = new Set();
-            let phiOptimizationScore = 0;
-
-            // Analyze each file's metadata
-            files.forEach(file => {
-                const metadata = extractFileMetadata(file);
-                totalOriginalSize += file.size;
-
-                // Estimate compression based on file type and patterns
-                let compressionFactor = getCompressionFactorByType(metadata.extension);
-
-                // Apply pattern bonuses
-                if (metadata.namePattern.includes('redundant')) compressionFactor *= 0.7;
-                if (metadata.namePattern.includes('structured')) compressionFactor *= 0.85;
-                if (metadata.namePattern.includes('date')) compressionFactor *= 0.9;
-
-                // Add size-based optimization
-                if (metadata.sizeCategory === 'large' || metadata.sizeCategory === 'huge') {
-                    compressionFactor *= 0.8; // Large files often compress better
-                }
-
-                estimatedCompressedSize += Math.floor(file.size * compressionFactor);
-
-                // Track patterns
-                metadata.namePattern.forEach(pattern => detectedPatterns.add(pattern));
-                detectedPatterns.add(`${metadata.extension}_file`);
-                detectedPatterns.add(`${metadata.sizeCategory}_size`);
-            });
-
-            // Calculate Golden Ratio optimization for file structure
-            phiOptimizationScore = calculateFileStructurePhiScore(files);
-
-            return {
-                originalSize: totalOriginalSize,
-                compressedSize: estimatedCompressedSize,
-                patterns: Array.from(detectedPatterns),
-                phiOptimization: phiOptimizationScore,
-                compressionRatio: estimatedCompressedSize / totalOriginalSize,
-                spaceSaved: ((totalOriginalSize - estimatedCompressedSize) / totalOriginalSize) * 100,
-                fileCount: files.length,
-                dataType: 'files'
-            };
-        }
-
-        function processTextData(input) {
-            const originalSize = new TextEncoder().encode(input).length;
-            const patterns = detectPatterns(input);
-            const phiOptimization = calculatePhiOptimization(input, patterns);
-            const entropy = calculateEntropy(input);
-            const compressionRatio = Math.max(0.05, 0.8 - (entropy * 0.3) - (patterns.length * 0.05));
-            const compressedSize = Math.floor(originalSize * compressionRatio);
-            const spaceSaved = ((1 - compressionRatio) * 100);
-
-            return {
-                originalSize: originalSize,
-                compressedSize: compressedSize,
-                patterns: patterns,
-                phiOptimization: phiOptimization,
-                compressionRatio: compressionRatio,
-                spaceSaved: spaceSaved,
-                dataType: 'text'
-            };
-        }
-
-        function getCompressionFactorByType(extension) {
-            const compressionFactors = {
-                // Already compressed formats
-                'jpg': 0.95, 'jpeg': 0.95, 'png': 0.9, 'gif': 0.95,
-                'mp3': 0.98, 'mp4': 0.98, 'avi': 0.95,
-                'zip': 0.99, 'rar': 0.99, '7z': 0.99,
-
-                // Text-based formats (compress well)
-                'txt': 0.3, 'csv': 0.25, 'json': 0.35,
-                'html': 0.4, 'css': 0.35, 'js': 0.4,
-                'xml': 0.3, 'log': 0.2,
-
-                // Document formats
-                'pdf': 0.8, 'doc': 0.7, 'docx': 0.6,
-                'xls': 0.6, 'xlsx': 0.5,
-
-                // Code files
-                'py': 0.4, 'java': 0.45, 'cpp': 0.4,
-                'c': 0.4, 'h': 0.4, 'php': 0.45,
-
-                // Default
-                'default': 0.6
-            };
-
-            return compressionFactors[extension] || compressionFactors['default'];
-        }
-
-        function calculateFileStructurePhiScore(files) {
-            let score = 0.5; // Base score
-
-            // File count Golden Ratio optimization
-            const goldenFileCount = Math.floor(files.length * 0.618);
-            if (files.length === goldenFileCount || files.length === Math.ceil(files.length * 1.618)) {
-                score += 0.2;
-            }
-
-            // Size distribution analysis
-            const sizes = files.map(f => f.size).sort((a, b) => a - b);
-            if (sizes.length > 1) {
-                const ratio = sizes[sizes.length - 1] / sizes[0];
-                const phiProximity = Math.abs(ratio - 1.618) / 1.618;
-                score += (1 - phiProximity) * 0.2;
-            }
-
-            // File extension diversity (φ-based)
-            const extensions = new Set(files.map(f => f.name.split('.').pop().toLowerCase()));
-            const diversityRatio = extensions.size / files.length;
-            if (Math.abs(diversityRatio - 0.618) < 0.1) {
-                score += 0.15;
-            }
-
-            // Mathematical beauty in file names
-            files.forEach(file => {
-                if (file.name.match(/phi|1\.618|golden|fibonacci/i)) {
-                    score += 0.05;
-                }
-            });
-
-            return Math.min(score, 1.0);
-        }
-
-        // Memory DNA Compression Simulation
-        function compressWithMemoryDNA() {
-            const input = document.getElementById('compressionInput').value;
-            const resultArea = document.getElementById('compressionResult');
-            const compressBtn = document.getElementById('compressBtn');
-
-            // Check if we have files or text
-            const hasFiles = selectedFiles.length > 0;
-            const hasText = input.trim().length > 0;
-
-            if (!hasFiles && !hasText) {
-                resultArea.textContent = '❌ Please upload files or enter text to compress.';
-                return;
-            }
-
-            // Security validation for files
-            if (hasFiles) {
-                const securityCheck = validateFilesSecurity(selectedFiles);
-                if (!securityCheck.safe) {
-                    resultArea.textContent = `❌ Security Warning: ${securityCheck.reason}`;
-                    return;
-                }
-            }
-
-            // Disable button and show processing
-            compressBtn.disabled = true;
-            compressBtn.textContent = '🔄 Compressing...';
-
-            if (hasFiles) {
-                resultArea.textContent = '🧬 Processing files with Memory DNA...\n⚡ Analyzing metadata patterns...\n📐 Applying φ optimization to file structures...';
-            } else {
-                resultArea.textContent = '🧬 Processing with Golden Ratio optimization...\n⚡ Analyzing patterns...\n📐 Applying φ weighting...';
-            }
-
-            // Simulate processing time
-            setTimeout(() => {
-                let compressionResults;
-
-                if (hasFiles) {
-                    // Process files (metadata only)
-                    compressionResults = processFilesMetadata(selectedFiles);
-                } else {
-                    // Process text
-                    compressionResults = processTextData(input);
-                }
-
-                // Processing time simulation
-                const processingTime = Math.floor(Math.random() * 10) + (hasFiles ? 5 : 1);
-
-                // Display results based on data type
-                if (compressionResults.dataType === 'files') {
-                    resultArea.textContent = `✅ Memory DNA File Analysis Complete!
-
-📁 FILE ANALYSIS:
-Files processed: ${compressionResults.fileCount} files
-Total original size: ${formatBytes(compressionResults.originalSize)}
-Estimated compressed size: ${formatBytes(compressionResults.compressedSize)}
-Compression ratio: ${(compressionResults.compressionRatio * 100).toFixed(1)}%
-Space saved: ${compressionResults.spaceSaved.toFixed(1)}%
-
-🧬 METADATA PATTERN RECOGNITION:
-Patterns detected: ${compressionResults.patterns.length}
-Pattern types: ${compressionResults.patterns.join(', ') || 'Basic file structures'}
-
-📐 GOLDEN RATIO OPTIMIZATION:
-φ file structure score: ${(compressionResults.phiOptimization * 100).toFixed(1)}%
-Mathematical beauty: ${compressionResults.phiOptimization >= 0.95 ? 'EXCELLENT ⭐⭐⭐' : compressionResults.phiOptimization >= 0.8 ? 'GOOD ⭐⭐' : 'STANDARD ⭐'}
-
-⚡ PERFORMANCE:
-Processing time: ${processingTime}ms
-Algorithm: Memory DNA v2.0 with φ file structure weighting
-Metadata-only analysis: SECURE (no file contents accessed)
-
-🎯 RESULT: ${compressionResults.spaceSaved >= 70 ? 'EXCEPTIONAL metadata-based compression predicted!' : compressionResults.spaceSaved >= 50 ? 'EXCELLENT compression potential!' : compressionResults.spaceSaved >= 30 ? 'GOOD compression expected!' : 'Standard compression potential.'}
-
-🔒 PRIVACY: Only file metadata analyzed. File contents never accessed or stored.`;
-                } else {
-                    resultArea.textContent = `✅ Memory DNA Text Compression Complete!
-
-📊 COMPRESSION ANALYSIS:
-Original size: ${compressionResults.originalSize.toLocaleString()} bytes
-Compressed size: ${compressionResults.compressedSize.toLocaleString()} bytes
-Compression ratio: ${(compressionResults.compressionRatio * 100).toFixed(1)}%
-Space saved: ${compressionResults.spaceSaved.toFixed(1)}%
-
-🧬 PATTERN RECOGNITION:
-Patterns detected: ${compressionResults.patterns.length}
-Pattern types: ${compressionResults.patterns.join(', ') || 'Basic repetition'}
-
-📐 GOLDEN RATIO OPTIMIZATION:
-φ optimization score: ${(compressionResults.phiOptimization * 100).toFixed(1)}%
-Mathematical beauty: ${compressionResults.phiOptimization >= 0.95 ? 'EXCELLENT ⭐⭐⭐' : compressionResults.phiOptimization >= 0.8 ? 'GOOD ⭐⭐' : 'STANDARD ⭐'}
-
-⚡ PERFORMANCE:
-Processing time: ${processingTime}ms
-Algorithm: Memory DNA v2.0 with φ weighting
-Fibonacci optimization: ${compressionResults.patterns.length > 5 ? 'Active' : 'Standard'}
-
-🎯 RESULT: ${compressionResults.spaceSaved >= 80 ? 'EXCEPTIONAL compression achieved!' : compressionResults.spaceSaved >= 60 ? 'EXCELLENT compression!' : compressionResults.spaceSaved >= 40 ? 'GOOD compression!' : 'Standard compression.'}`;
-                }
-
-                // Update metrics display
-                updateMetrics({
-                    compressionRatio: `${compressionResults.spaceSaved.toFixed(0)}%`,
-                    phiOptimization: `${(compressionResults.phiOptimization * 100).toFixed(0)}%`,
-                    patternsFound: compressionResults.patterns.length,
-                    processingTime: `${processingTime}ms`
-                });
-
-                // Re-enable button
-                compressBtn.disabled = false;
-                compressBtn.textContent = '🧬 Compress with φ Optimization';
-
-                // Send learning data to Radiant Data Tree
-                if (rdtLearningEnabled) {
-                    setTimeout(() => {
-                        sendLearningDataToRDT(
-                            hasFiles ? 'file_analysis' : 'text_compression',
-                            {
-                                hasFiles: hasFiles,
-                                fileCount: hasFiles ? selectedFiles.length : 0,
-                                textLength: hasText ? input.length : 0,
-                                patterns: compressionResults.patterns,
-                                compressionRatio: compressionResults.compressionRatio,
-                                spaceSaved: compressionResults.spaceSaved
-                            },
-                            compressionResults.phiOptimization
-                        );
-                    }, 500);
-                }
-
-            }, 2000);
-        }
-
-        // Radiant Data Tree Learning Integration
-        async function sendLearningDataToRDT(operation, data, upeScore) {
-            if (!rdtLearningEnabled) return;
-
-            try {
-                const learningData = {
-                    operation: operation,
-                    data: data,
-                    upeScore: upeScore,
-                    source: 'prothean_shield_browser',
-                    timestamp: Date.now()
-                };
-
-                const response = await fetch(`${RDT_ENDPOINT}/learn-from-operation`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(learningData)
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('🌟 RDT Learning: Data sent successfully', result);
-
-                    // Update UI to show learning feedback
-                    updateRDTStatus('Learning data integrated ✨');
-                    return result;
-                } else {
-                    console.warn('⚠️ RDT Learning: Failed to send data', response.status);
-                }
-            } catch (error) {
-                console.warn('⚠️ RDT Learning: Connection failed', error.message);
-                updateRDTStatus('Learning offline');
-            }
-        }
-
-        async function getRDTOptimizations(context) {
-            if (!rdtLearningEnabled) return [];
-
-            try {
-                const response = await fetch(`${RDT_ENDPOINT}/optimization-opportunities`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(context)
-                });
-
-                if (response.ok) {
-                    const optimizations = await response.json();
-                    console.log('💡 RDT Optimizations received:', optimizations);
-                    return optimizations;
-                }
-            } catch (error) {
-                console.warn('⚠️ RDT Optimizations: Connection failed', error.message);
-            }
-
-            return [];
-        }
-
-        function updateRDTStatus(message) {
-            // Update the phi indicator to show RDT status
-            const indicator = document.getElementById('beautyIndicator');
-            if (indicator) {
-                const originalText = indicator.textContent;
-                indicator.textContent = `${originalText.split('|')[0]}| ${message}`;
-
-                // Revert after 3 seconds
-                setTimeout(() => {
-                    indicator.textContent = originalText;
-                }, 3000);
-            }
-        }
-
-        function detectPatterns(text) {
-            const patterns = [];
-
-            // Check for common patterns
-            if (text.toLowerCase().includes('pattern') || text.toLowerCase().includes('repeat')) {
-                patterns.push('repetitive');
-            }
-            if (text.match(/\b(golden|ratio|phi|fibonacci)\b/gi)) {
-                patterns.push('mathematical');
-            }
-            if (text.match(/\b(the|and|or|in|on|at|to|for|of|with|by)\b/gi)) {
-                patterns.push('linguistic');
-            }
-            if (text.length > 200) {
-                patterns.push('extended');
-            }
-            if (text.match(/\d+/g)) {
-                patterns.push('numerical');
-            }
-
-            return patterns;
-        }
-
-        function calculatePhiOptimization(text, patterns) {
-            let score = 0.5; // Base score
-
-            // Length optimization (Golden Ratio preference)
-            const idealLength = Math.floor(text.length * 0.618);
-            const lengthScore = 1 - Math.abs(text.length - idealLength) / text.length;
-            score += lengthScore * 0.2;
-
-            // Pattern diversity bonus
-            score += Math.min(patterns.length * 0.1, 0.3);
-
-            // Mathematical content bonus
-            if (text.toLowerCase().includes('phi') || text.toLowerCase().includes('1.618')) {
-                score += 0.15;
-            }
-
-            // Fibonacci numbers detection
-            const fibNumbers = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
-            const hasFib = fibNumbers.some(num => text.includes(num.toString()));
-            if (hasFib) score += 0.1;
-
-            return Math.min(score, 1.0);
-        }
-
-        function calculateEntropy(text) {
-            const freq = {};
-            for (let char of text) {
-                freq[char] = (freq[char] || 0) + 1;
-            }
-
-            let entropy = 0;
-            const len = text.length;
-            for (let count of Object.values(freq)) {
-                const p = count / len;
-                entropy -= p * Math.log2(p);
-            }
-
-            return entropy / 8; // Normalize to 0-1 range
-        }
-
         function updateMetrics(metrics) {
             document.getElementById('compressionRatio').textContent = metrics.compressionRatio;
             document.getElementById('phiOptimization').textContent = metrics.phiOptimization;
@@ -1529,144 +1039,41 @@ Fibonacci optimization: ${compressionResults.patterns.length > 5 ? 'Active' : 'S
             document.getElementById('processingTime').textContent = metrics.processingTime;
         }
 
-        // Stripe Integration
-        let stripe, elements, card;
-        let selectedPlan = null;
+        // Stripe Integration - Checkout Flow
+        const stripe = Stripe('pk_test_51234567890abcdef1234567890abcdef12345678'); // Replace with your REAL publishable key in production
 
-        // Initialize Stripe
-        function initializeStripe() {
-            stripe = Stripe('pk_test_51234567890abcdef1234567890abcdef12345678'); // Replace with your publishable key
-            elements = stripe.elements();
-
-            const style = {
-                base: {
-                    color: '#F3F4F5',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    fontSmoothing: 'antialiased',
-                    fontSize: '16px',
-                    '::placeholder': {
-                        color: 'rgba(243, 244, 245, 0.6)'
-                    }
-                },
-                invalid: {
-                    color: '#F44336',
-                    iconColor: '#F44336'
-                }
-            };
-
-            card = elements.create('card', { style });
-            card.mount('#card-element');
-
-            card.on('change', ({ error }) => {
-                const displayError = document.getElementById('card-errors');
-                if (error) {
-                    displayError.textContent = error.message;
-                } else {
-                    displayError.textContent = '';
-                }
-            });
-
-            // Handle form submission
-            const form = document.getElementById('payment-form');
-            form.addEventListener('submit', handleSubmit);
-        }
-
-        function selectPlan(plan) {
-            selectedPlan = plan;
-
-            if (plan === 'free') {
-                alert('🎉 Welcome to Prothean Shield Freemium!\n\n✅ 1GB Memory DNA compression activated\n✅ Basic Golden Ratio optimization enabled\n✅ Standard pattern recognition ready\n\nEnjoy your free compression power!');
+        async function selectPlan(planType) {
+            if (planType === 'free') {
+                alert('🎉 Welcome to Prothean Shield Freemium!');
                 return;
             }
 
-            const plans = {
-                premium: { name: 'Premium', price: 20.00 },
-                enterprise: { name: 'Enterprise', price: 150.00 }
-            };
-
-            const selectedPlanData = plans[plan];
-            document.getElementById('paymentTitle').textContent = `Upgrade to ${selectedPlanData.name}`;
-            document.getElementById('paymentAmount').textContent = `$${selectedPlanData.price.toFixed(2)}`;
-
-            openPaymentModal();
-        }
-
-        function openPaymentModal() {
-            document.getElementById('paymentModal').classList.add('active');
-            if (!stripe) {
-                initializeStripe();
-            }
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.remove('active');
-        }
-
-        async function handleSubmit(event) {
-            event.preventDefault();
-
-            const submitButton = document.getElementById('submit-payment');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Processing...';
-
-            // Create payment method
-            const { error, paymentMethod } = await stripe.createPaymentMethod({
-                type: 'card',
-                card: card,
-                billing_details: {
-                    name: 'Prothean Shield User',
-                },
-            });
-
-            if (error) {
-                document.getElementById('card-errors').textContent = error.message;
-                submitButton.disabled = false;
-                submitButton.textContent = 'Complete Payment';
-                return;
-            }
-
-            // Simulate payment processing
-            setTimeout(() => {
-                // Success simulation
-                closePaymentModal();
-
-                const planNames = {
-                    premium: 'Premium',
-                    enterprise: 'Enterprise'
-                };
-
-                const planFeatures = {
-                    premium: [
-                        '✅ Unlocked Memory DNA compression',
-                        '✅ Advanced φ optimization (95%+ beauty)',
-                        '✅ Helios rendering engine',
-                        '✅ Veridian AI chat',
-                        '✅ Priority processing'
-                    ],
-                    enterprise: [
-                        '✅ Everything in Premium',
-                        '✅ Uncensored LLM,
-                        '✅ 4K image rendering',
-                        '✅ API access',
-                        '✅ Mathematical beauty > 99%'
-                    ]
-                };
-
-                alert(`🎉 Welcome to Prothean Shield ${planNames[selectedPlan]}!\n\n${planFeatures[selectedPlan].join('\n')}\n\n🚀 Your upgrade is now active!\n📧 Confirmation email sent.`);
-
-                // Update button text to reflect upgrade
-                const buttons = document.querySelectorAll('.select-plan-btn');
-                buttons.forEach(btn => {
-                    if (btn.textContent.includes(planNames[selectedPlan])) {
-                        btn.textContent = '✅ Active';
-                        btn.disabled = true;
-                        btn.style.background = '#4CAF50';
-                    }
+            try {
+                // Call the backend to create a checkout session
+                const response = await fetch('/api/v1/payments/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ planType: planType, originUrl: window.location.origin })
                 });
 
-                submitButton.disabled = false;
-                submitButton.textContent = 'Complete Payment';
-            }, 2000);
+                if (!response.ok) {
+                    throw new Error('Could not create checkout session.');
+                }
+
+                const session = await response.json();
+
+                // Redirect to Stripe Checkout
+                const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            } catch (error) {
+                console.error('Error selecting plan:', error);
+                alert('Could not initiate payment. Please try again.');
+            }
         }
 
         // Mathematical Beauty Score Calculation

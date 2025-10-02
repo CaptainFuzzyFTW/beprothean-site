@@ -1,27 +1,169 @@
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Title</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-</head>
-<body>
-  <main>
-    <section id="about">
-      <h2>About</h2>
-      <div class="glass-panel p-6">
-        <p class="text-lg text-gray-800">This is the about section.</p>
-      </div>
-    </section>
-    <!-- Other sections would go here -->
-  </main>
-  <footer>
-    <div class="text-center p-4">
-      <p>© 2023 Your Company</p>
-    </div>
-  </footer>
-</body>
-</html>
-```
+ <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Prothean Shield | VPN & Compressor Power</title>
+      <style>
+          /* Base styles */
+          body {
+              font-family: 'Inter', system-ui, -apple-system, sans-serif;
+              margin: 0;
+              background-color: #1D2126;
+          }
+
+          /* Hero section */
+          .hero {
+              background: #1D2126;
+              color: #F3F4F5;
+              padding: 120px 24px;
+              min-height: 100vh;
+          }
+
+          .hero .wrap {
+              max-width: 1040px;
+              margin: 0 auto;
+              text-align: center;
+              width: 100%;
+          }
+
+          /* Pre-header */
+          .hero .pre-header {
+              font-size: 40px;
+              font-weight: 700;
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+              color: #0D6A74;
+              margin-bottom: 40px;
+              opacity: 0.9;
+              line-height: 1.1;
+          }
+
+          /* Main heading */
+          .hero h1 {
+              font-family: "Inter var", system-ui, -apple-system, sans-serif;
+              font-weight: 800;
+              letter-spacing: -0.02em;
+              font-size: clamp(40px, 6vw, 72px);
+              margin: 0 0 16px;
+              line-height: 1.1;
+          }
+
+          /* Subheading */
+          .hero .sub {
+              font-size: clamp(16px, 2.2vw, 22px);
+              opacity: 0.9;
+              margin: 0 auto 8px;
+              max-width: 720px;
+          }
+
+          /* Catchphrase */
+          .hero .catchphrase {
+              font-size: clamp(14px, 1.8vw, 18px);
+              font-style: italic;
+              opacity: 0.7;
+              margin: 0 auto 28px;
+              max-width: 720px;
+          }
+
+          /* CTA buttons container */
+          .cta {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+              margin-bottom: 40px;
+          }
+
+          @media (min-width: 640px) {
+              .cta {
+                  flex-direction: row;
+                  justify-content: center;
+              }
+          }
+
+          /* Button base */
+          .btn {
+              display: inline-block;
+              padding: 14px 28px;
+              border-radius: 12px;
+              text-decoration: none;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              white-space: nowrap;
+          }
+
+          /* Primary button */
+          .btn.primary {
+              background: #0D6A74;
+              color: #fff;
+              box-shadow: 0 8px 24px rgba(13, 106, 116, 0.32);
+          }
+
+          .btn.primary:hover {
+              background: #094e55;
+              box-shadow: 0 8px 30px rgba(13, 106, 116, 0.45);
+              transform: translateY(-1px);
+          }
+
+          /* Ghost button */
+          .btn.ghost {
+              color: #F3F4F5;
+              border: 1px solid rgba(243, 244, 245, 0.18);
+          }
+
+          @media (min-width: 640px) {
+              .btn.ghost {
+                  margin-left: 12px;
+              }
+          }
+
+          .btn.ghost:hover {
+              border-color: #0D6A74;
+              color: #0D6A74;
+              background: rgba(13, 106, 116, 0.1);
+          }
+
+          /* Trust list */
+          .trust {
+              list-style: none;
+              padding: 0;
+              margin: 20px 0 0;
+              display: flex;
+              gap: 16px;
+              justify-content: center;
+              opacity: 0.8;
+              font-size: 14px;
+              flex-wrap: wrap;
+          }
+
+          .trust li {
+              position: relative;
+          }
+      </style>
+  </head>
+  <body>
+      <section class="hero">
+          <div class="wrap">
+              <p class="pre-header">PROTHEAN SHIELD</p>
+              <h1>Your Browser. Your Power.</h1>
+              <p class="sub">
+                  Enjoy a free VPN service, world-leading compression, and the fastest
+  Chrome experience. Guaranteed.
+              </p>
+              <p class="catchphrase">
+                  Hey, we'll throw in our MemoryDNA compressor because we can.
+              </p>
+              <div class="cta">
+                  <a class="btn primary" href="#install">Get Prothean Shield</a>
+                  <a class="btn ghost" href="#how">See how it works</a>
+              </div>
+              <ul class="trust">
+                  <li>Private by design</li>
+                  <li>Open review ready</li>
+                  <li>Chrome & Safari</li>
+              </ul>
+          </div>
+      </section>
+  </body>
+  </html>

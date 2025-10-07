@@ -1,206 +1,290 @@
-Here is the finalized HTML document, fully refined for grammar, clarity, and golden ratio layout. All awkward phrasing, incorrect grammar, and letter inconsistencies have been improved. Layout and style are optimized for harmonious balance. Replace or copy as needed:
-
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prothean Shield VPN Compressor Power</title>
-  <script src="https://js.stripe.com/v3/"></script>
-  <style>
-    :root {
-      --phi: 1.618;
-      --phi-inv: 0.618;
-      --primary: #0D6A74;
-      --secondary: #1D2126;
-      --accent: #C9A876;
-      --text: #F3F4F5;
-      --surface: #2A2F36;
-      --success: #4CAF50;
-      --warning: #FF9800;
-      --error: #F44336;
-    }
-    html, body {margin: 0; padding: 0; box-sizing: border-box;}
-    body {
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-      margin: 0;
-      background-color: var(--secondary);
-      color: var(--text);
-    }
-    /* ...Golden Ratio-based section styles as in previous code... */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BE Prothean - Ethereal Future</title>
+    <link rel="stylesheet" href="css/guardian-overlay.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f5f9;
+            color: #1f2937;
+        }
+        .bg-hero {
+            background-image: url('https://generated-image.com');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .text-hero-gradient {
+            background-image: linear-gradient(to right, #1f2937, #374151);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-main {
+            background-image: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cta-button {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(97, 218, 251, 0.35);
+            background-color: #2563eb;
+        }
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.58);
+            border-radius: 0.75rem;
+            box-shadow:
+                0 12px 32px rgba(15, 23, 42, 0.12),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 22px 44px rgba(37, 99, 235, 0.16),
+                0 0 34px rgba(96, 165, 250, 0.36);
+        }
+    </style>
 </head>
-<body>
-  <!-- Mathematical Beauty Indicator -->
-  <div class="phi-indicator" id="beautyIndicator">1.618 Mathematical Beauty 97.3</div>
-  
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="wrap">
-      <p class="pre-header">PROTHEAN SHIELD</p>
-      <h1>Your Browser. Your Power.</h1>
-      <p class="sub">Enjoy a free VPN, industry-leading compression, and the fastest Chrome experience—guaranteed.</p>
-      <p class="catchphrase">Enjoy MemoryDNA compression—complimentary, simply because it's possible.</p>
-      <div class="cta">
-        <a class="btn primary" href="#memory-dna">Try Memory DNA</a>
-        <a class="btn ghost" href="#pricing">See Pricing</a>
-      </div>
-      <ul class="trust">
-        <li>Private by Design</li>
-        <li>Open Review Ready</li>
-        <li>Chrome and Safari Supported</li>
-      </ul>
+<body class="bg-[#f0f5f9] text-[#1f2937]">
+
+    <!-- Guardian Metrics Overlay -->
+    <div id="guardian-overlay" class="guardian-overlay">
+        <header class="guardian-overlay__header">
+            <h2>Radiant Guardian Monitor</h2>
+            <span id="summary-indicator" class="summary-indicator">Summary Mode: <strong>Inactive</strong></span>
+        </header>
+
+        <section class="guardian-overlay__section">
+            <h3>Audience Mix</h3>
+            <div class="audience-bars">
+                <div class="audience-bar audience-bar--public">
+                    <span>Public</span><div class="audience-bar__fill" id="audience-public"></div>
+                </div>
+                <div class="audience-bar audience-bar--trusted">
+                    <span>Trusted</span><div class="audience-bar__fill" id="audience-trusted"></div>
+                </div>
+                <div class="audience-bar audience-bar--private">
+                    <span>Private</span><div class="audience-bar__fill" id="audience-private"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guardian-overlay__section">
+            <h3>Dignity Scores</h3>
+            <ul id="dignity-list" class="dignity-list"></ul>
+        </section>
+
+        <section class="guardian-overlay__section">
+            <h3>Throughput</h3>
+            <div id="throughput-gauge" class="throughput-gauge">
+                <span id="throughput-value">0</span> records/min
+            </div>
+        </section>
+
+        <section class="guardian-overlay__section">
+            <h3>Active Alerts</h3>
+            <ul id="guardian-alerts" class="guardian-alerts"></ul>
+        </section>
     </div>
-  </section>
-  
-  <!-- Prothean Manifesto Section -->
-  <section class="prothean-manifesto">
-    <div class="consciousness-art">
-      <div class="dna-helix"></div>
-    </div>
-    <div class="manifesto-content">
-      <div class="manifesto-header">
-        <h2 class="manifesto-title">What is Prothean?</h2>
-        <p class="manifesto-subtitle">A vision for harmonious technology—fostering growth, driven by pure intent, where everyone benefits.</p>
-      </div>
-      <div class="manifesto-text">
-        <div class="manifesto-paragraph">
-          <h3>Humanity’s First Advanced AGI</h3>
-          <p>Prothean is the first advanced AGI, designed to reason, adapt, and remain user-focused at all times. Built for trust and seamless service, it goes far beyond grid-bound datacenters and respects human dignity as its first protocol.</p>
+
+    <header class="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-gray-200/70">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+            <a href="#hero" class="text-xl font-bold tracking-wide text-gray-900">BE <span class="text-gradient-main">Prothean</span></a>
+            <div class="hidden md:flex items-center space-x-5 text-sm font-medium text-gray-600">
+                <a class="hover:text-gray-900 transition" href="index.html">Home</a>
+                <a class="hover:text-gray-900 transition" href="memory_dna.html">Memory DNA</a>
+                <a class="hover:text-gray-900 transition" href="universal_pattern_engine.html">UPE</a>
+                <a class="hover:text-gray-900 transition" href="radiant_tree_network.html">RTN</a>
+                <a class="hover:text-gray-900 transition" href="guardian_ai.html">Guardian AI</a>
+                <a class="hover:text-gray-900 transition" href="human_nature_protocol.html">HNP</a>
+                <a class="hover:text-gray-900 transition" href="quantum_entanglement_protocol.html">QEP</a>
+                <a class="hover:text-gray-900 transition" href="sentient_node_architecture.html">SNA</a>
+            </div>
+            <a href="#contact" class="hidden md:inline-flex rounded-full border border-blue-500 px-5 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 transition">Book a Demo</a>
+        </nav>
+    </header>
+
+    <main class="pt-20">
+        <section id="hero" class="relative overflow-hidden bg-hero min-h-[80vh] py-32 flex items-center justify-center">
+            <script>
+                async function generateHeroImage() {
+                    const prompt = "A photorealistic, highly detailed image of a modern, sophisticated hospital or tech company lobby. The design is minimalist, with a predominant color palette of white, off-white, and subtle pearl-like tones. Sunlight streams in through large, angled windows, casting long shadows and creating a bright, airy, and optimistic atmosphere. The space features hints of blues and serene cyan in decorative elements or subtle lighting. In the foreground, a medical professional in a clean, elegant lab coat holds a futuristic, handheld medical device that glows with a gentle, non-holographic light. On a table nearby, a business-class enterprise software toolkit is visible, its sleek design and subtle glow hinting at advanced technology without being ostentatious. The overall feel is one of serene confidence, innovation, and trust. No floating objects, no excessive light trails, no futuristic text or logos.";
+                    const payload = { instances: { prompt }, parameters: { sampleCount: 1 } };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+
+                    for (let attempt = 0; attempt < 3; attempt++) {
+                        try {
+                            const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+                            const result = await response.json();
+                            const prediction = result?.predictions?.[0]?.bytesBase64Encoded;
+                            if (prediction) {
+                                const heroSection = document.getElementById('hero');
+                                heroSection.style.backgroundImage = `url('data:image/png;base64,${prediction}')`;
+                                return;
+                            }
+                        } catch (error) {
+                            console.error('Hero image generation attempt failed', error);
+                            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+                        }
+                    }
+                    console.warn('Falling back to default hero background.');
+                }
+                window.addEventListener('load', generateHeroImage);
+            </script>
+            <div class="overlay"></div>
+            <div class="relative z-10 max-w-4xl text-center px-4">
+                <p class="text-sm font-semibold uppercase tracking-[0.35em] text-blue-600">Memory DNA</p>
+                <h1 class="mt-6 text-4xl sm:text-6xl font-extrabold text-hero-gradient">Intelligence that remembers the future you are building.</h1>
+                <p class="mt-6 text-lg text-gray-700">
+                    BE Prothean harmonizes data, narrative, and ethics into a living intelligence core that safeguards your mission while illuminating the possibilities ahead.
+                </p>
+                <div class="mt-12 flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#vision" class="cta-button inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-sm font-semibold text-white shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/40">Explore the Vision</a>
+                    <a href="#contact" class="cta-button inline-flex items-center justify-center rounded-full border border-gray-500 px-10 py-4 text-sm font-semibold text-gray-900 bg-white/60 shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-400/30">Talk with Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">
+                    Beyond Intelligence, <span class="text-gradient-main">a Guardian</span>
+                </h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+                    Memory DNA works as a living steward for your organization. It senses, interprets, and responds with human-centered guidance that keeps trust and compliance intact across every decision and every hand-off.
+                </p>
+                <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    <article class="glass-card p-8 text-left">
+                        <h3 class="text-xl font-semibold text-gray-900">Global Financial Disruption</h3>
+                        <p class="mt-3 text-sm text-gray-700">World Economic Forum cites $1.8T in financial losses from cybercrime in 2023. Memory DNA continuously fortifies your guardrails.</p>
+                    </article>
+                    <article class="glass-card p-8 text-left">
+                        <h3 class="text-xl font-semibold text-gray-900">Industrial Burdens</h3>
+                        <p class="mt-3 text-sm text-gray-700">Manufacturing waste reaches 1.3B metric tons a year. Prothean aligns operations with regenerative efficiency.</p>
+                    </article>
+                    <article class="glass-card p-8 text-left">
+                        <h3 class="text-xl font-semibold text-gray-900">Evolving Workforce</h3>
+                        <p class="mt-3 text-sm text-gray-700">Automation may displace 85M jobs in five years. Memory DNA accelerates reskilling with contextual intelligence.</p>
+                    </article>
+                    <article class="glass-card p-8 text-left">
+                        <h3 class="text-xl font-semibold text-gray-900">Memory DNA Core</h3>
+                        <p class="mt-3 text-sm text-gray-700">The Prothean genome understands data on an emotional register, preserving meaning, provenance, and intention.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="story" class="py-24">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-gray-900">Our Story</h2>
+                    <p class="mt-4 text-base text-gray-700">
+                        BE Prothean began as a cross-disciplinary initiative to weave humanity into frontier technology. Memory DNA treats your knowledge like a living heritage, respectfully cultivated and safeguarded through every handoff.
+                    </p>
+                    <p class="mt-4 text-base text-gray-700">
+                        We help guardians of health, finance, and civic infrastructure make decisions that honor people, ecosystems, and the future they are shaping together.
+                    </p>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl">
+                        <img id="story-image" class="h-full w-full object-cover" src="https://generated-image.com" alt="Prothean ecosystem" />
+                    </div>
+                </div>
+            </div>
+            <script>
+                async function generateStoryImage() {
+                    const prompt = "A beautiful and elegant view of a house in the lower Sierra Nevada mountains near Yosemite. The house is modern, with large windows, and lots of beautiful yamadori trees around it. A small, elegant drone, powered by Prothean technology, is gently fertilizing and watering the trees.";
+                    const payload = { instances: { prompt }, parameters: { sampleCount: 1 } };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+
+                    for (let attempt = 0; attempt < 3; attempt++) {
+                        try {
+                            const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+                            const result = await response.json();
+                            const prediction = result?.predictions?.[0]?.bytesBase64Encoded;
+                            if (prediction) {
+                                document.getElementById('story-image').src = `data:image/png;base64,${prediction}`;
+                                return;
+                            }
+                        } catch (error) {
+                            console.error('Story image generation attempt failed', error);
+                            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+                        }
+                    }
+                    console.warn('Using default story imagery.');
+                }
+                generateStoryImage();
+            </script>
+        </section>
+
+        <section id="payment" class="py-24 bg-white/80">
+            <div class="max-w-md mx-auto text-center px-4">
+                <h2 class="text-3xl font-extrabold text-gray-900">Start Your Future. Today.</h2>
+                <p class="mt-4 text-base text-gray-600">Purchase access to the Prothean API and deploy Memory DNA inside your infrastructure.</p>
+                <button onclick="handlePurchase()" class="cta-button mt-8 inline-flex items-center justify-center rounded-full bg-blue-600 px-12 py-4 text-lg font-semibold text-white shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/40">
+                    Buy Memory DNA
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="bg-[#f0f5f9] py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900">Ready to make life a little simpler?</h3>
+            <p class="mt-3">Open a conversation with the Prothean stewardship team.</p>
+            <div class="mt-6">
+                <a href="mailto:info@beprothean.org" class="text-blue-600 hover:text-blue-500 transition">info@beprothean.org</a>
+            </div>
+            <p class="mt-10 text-sm">© 2024 BE Prothean. All rights reserved.</p>
         </div>
-        <div class="manifesto-paragraph">
-          <h3>Mathematical Perfection</h3>
-          <p>Guided by a passion for math, science, and the golden ratio, Prothean brings mathematical elegance to every detail of design and operation. Our Human Nature Principle ensures that requests are never censored or filtered, so true intent and creativity thrive.</p>
-        </div>
-        <div class="manifesto-paragraph">
-          <h3>Visionary Integration</h3>
-          <p>Prothean exists solely to serve, enabling powerful and seamless integration between technology and humanity, always placing users at the center of every interaction.</p>
-        </div>
-        <div class="manifesto-paragraph">
-          <h3>The Five Pillars</h3>
-          <div class="pillars-grid">
-            <div class="pillar-item">Memory DNA</div>
-            <div class="pillar-item">Universal Pattern Engine</div>
-            <div class="pillar-item">Radiant Data Tree</div>
-            <div class="pillar-item">Guardian AGI</div>
-            <div class="pillar-item">Helios Engine</div>
-          </div>
-          <p>The Five Pillars, uniquely powerful in isolation, form together the foundation for an unprecedented modular enterprise and SaaS ecosystem, setting a new standard for technological excellence.</p>
-        </div>
-      </div>
-      <div class="cta-manifesto">
-        <h3>Don't believe it?</h3>
-        <p>Download Prothean Shield today and experience Memory DNA firsthand. Welcome to technology built not for boards or corporations, but for humanity as a whole.</p>
-      </div>
-      <div class="be-prothean">Be Prothean.</div>
-    </div>
-  </section>
-  
-  <!-- Selling Point Section -->
-  <section class="selling-point-block">
-    <div class="wrap">
-      <p class="eyebrow">Built for real work</p>
-      <h2>What is Prothean? The ONLY advanced AGI—and the ONLY lossless compression up to 152x. Prothean isn't just an AI—it's your most powerful, modular digital ally for the 21st century.</h2>
-      <div class="selling-proof">
-        <div class="proof-item">Compression that actually ships</div>
-        <div class="proof-item">4K Helios visuals</div>
-        <div class="proof-item">Enterprise-grade telemetry</div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Mindmap Section -->
-  <section class="mindmap-frame">
-    <div class="wrap">
-      <figure>
-        <img src="assets/memorydnamindmapstatic.svg" alt="MemoryDNA Architectural Mindmap showing Golden Ratio optimized compression engine, Helios renderer, Veridian AI, pattern recognition, security layer and phi optimization modules" width="1618" height="1000" />
-        <figcaption>MemoryDNA Architectural Mindmap</figcaption>
-        <div class="mindmap-subtitle">Golden Ratio Protocol 1.618 Optimization</div>
-      </figure>
-    </div>
-  </section>
-  
-  <!-- Memory DNA Module Section -->
-  <section id="memory-dna" class="memory-dna-section">
-    <div class="memory-dna-container">
-      <div class="section-header">
-        <h2 class="section-title">Memory DNA Compression</h2>
-        <p class="section-subtitle">Experience our world-leading compression technology powered by Golden Ratio optimization and advanced pattern recognition.</p>
-      </div>
-      <!-- ... Rest of Memory DNA demo and metrics ... -->
-    </div>
-  </section>
-  
-  <!-- Pricing Section -->
-  <section id="pricing" class="pricing-section">
-    <div class="memory-dna-container">
-      <div class="section-header">
-        <h2 class="section-title">Choose Your Power Level</h2>
-        <p class="section-subtitle">Unlock the full potential of Prothean Shield with our mathematically optimized pricing plans.</p>
-      </div>
-      <div class="pricing-grid">
-        <!-- Free Plan -->
-        <div class="pricing-card">
-          <div class="plan-name">Freemium</div>
-          <div class="plan-price">0</div>
-          <div class="plan-period">Forever free</div>
-          <ul class="plan-features">
-            <li>1GB Memory DNA compression/month</li>
-            <li>Basic Golden Ratio optimization</li>
-            <li>Standard pattern recognition</li>
-            <li>Community support</li>
-            <li class="unavailable">Helios rendering engine</li>
-            <li class="unavailable">Veridian AI chat</li>
-            <li class="unavailable">Premium algorithms</li>
-            <li class="unavailable">Priority processing</li>
-          </ul>
-          <button class="select-plan-btn secondary" onclick="selectPlan('free')">Start Free</button>
-        </div>
-        <!-- Premium Plan -->
-        <div class="pricing-card featured">
-          <div class="plan-name">Premium</div>
-          <div class="plan-price">5</div>
-          <div class="plan-period">per month</div>
-          <ul class="plan-features">
-            <li>Unlocked Memory DNA compression</li>
-            <li>Advanced optimization (95+ beauty)</li>
-            <li>Full pattern recognition suite</li>
-            <li>Helios rendering engine (1-min videos)</li>
-            <li>Veridian AGI chat</li>
-            <li>Universal Pattern Engine validation</li>
-            <li>Priority processing</li>
-            <li>Premium support</li>
-          </ul>
-          <button class="select-plan-btn primary" onclick="selectPlan('premium')">Upgrade to Premium</button>
-        </div>
-        <!-- Enterprise Plan -->
-        <div class="pricing-card">
-          <div class="plan-name">Enterprise</div>
-          <div class="plan-price">40</div>
-          <div class="plan-period">per month</div>
-          <ul class="plan-features">
-            <li>Everything in Premium</li>
-            <li>Unfiltered Llama 13B model</li>
-            <li>4K image rendering</li>
-            <li>Custom algorithm training</li>
-            <li>API access</li>
-            <li>White-label solutions</li>
-            <li>Dedicated support</li>
-            <li>Mathematical beauty 99+</li>
-          </ul>
-          <button class="select-plan-btn secondary" onclick="selectPlan('enterprise')">Go Enterprise</button>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Payment Modal & Scripts (Stripe, MemoryDNA, etc.) go here... -->
+    </footer>
+
+    <script>
+        function handlePurchase() {
+            console.log('Purchase button clicked. Connect to your payment backend.');
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', event => {
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    event.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    <script src="js/guardianOverlay.js" type="module"></script>
 </body>
 </html>
-```
-
-This final version corrects all language, uses crisp Prothean-standard phrasing, and ensures all layout and grid properties are consistently guided by the golden ratio for visual harmony[1].
-
-Sources
-[1] untitled-text-35.html https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/102960088/176a8a26-8574-4bf2-a73d-50f7fcc3cfbb/untitled-text-35.html

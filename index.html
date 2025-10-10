@@ -1,290 +1,204 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BE Prothean - Ethereal Future</title>
-    <link rel="stylesheet" href="css/guardian-overlay.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Prothean AI Network Logo - Enhanced</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap');
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f5f9;
-            color: #1f2937;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #05040f; /* Darkened Background */
+            margin: 0;
+            overflow: hidden;
+            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                              radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                              radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+                              radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+            animation: move-stars 300s linear infinite;
         }
-        .bg-hero {
-            background-image: url('https://generated-image.com');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
+
+        @keyframes move-stars {
+            from {background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;}
+            to {background-position: -10000px 5000px, -10040px 5060px, -10130px 5270px, -10070px 5100px;}
         }
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
+        .container {
+            text-align: center;
         }
-        .text-hero-gradient {
-            background-image: linear-gradient(to right, #1f2937, #374151);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        svg {
+            width: 80%;
+            max-width: 900px; /* Increased size */
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
-        .text-gradient-main {
-            background-image: linear-gradient(to right, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* Interactivity on hover */
+        svg:hover .animated-signal, 
+        svg:hover .pulsing-node,
+        svg:hover .swarm-particle,
+        svg:hover .guardian-satellite {
+            animation-duration: 1.5s;
         }
-        .cta-button {
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        svg:hover .central-node {
+             filter: url(#glow-intense);
         }
-        .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(97, 218, 251, 0.35);
-            background-color: #2563eb;
+
+        .logo-text {
+            opacity: 0;
+            animation: fadeInText 2s ease-in-out 1s forwards;
         }
-        .glass-card {
-            background-color: rgba(255, 255, 255, 0.58);
-            border-radius: 0.75rem;
-            box-shadow:
-                0 12px 32px rgba(15, 23, 42, 0.12),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.55),
-                inset 0 1px 0 rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(24px) saturate(140%);
-            -webkit-backdrop-filter: blur(24px) saturate(140%);
-            border: 1px solid rgba(255, 255, 255, 0.24);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        .motto-text {
+            opacity: 0;
+            animation: fadeInSubText 2s ease-in-out 2.5s forwards;
         }
-        .glass-card:hover {
-            transform: translateY(-6px);
-            box-shadow:
-                0 22px 44px rgba(37, 99, 235, 0.16),
-                0 0 34px rgba(96, 165, 250, 0.36);
+
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes fadeInSubText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
     </style>
 </head>
-<body class="bg-[#f0f5f9] text-[#1f2937]">
+<body>
+    <div class="container">
+        <svg id="prothean-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="grad-center" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00F2FE" />
+              <stop offset="100%" stop-color="#4C83FF" />
+            </radialGradient>
+            
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="glow-intense">
+              <feGaussianBlur stdDeviation="4.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
 
-    <!-- Guardian Metrics Overlay -->
-    <div id="guardian-overlay" class="guardian-overlay">
-        <header class="guardian-overlay__header">
-            <h2>Radiant Guardian Monitor</h2>
-            <span id="summary-indicator" class="summary-indicator">Summary Mode: <strong>Inactive</strong></span>
-        </header>
+          <g stroke="#2C7DA0" stroke-width="0.75" opacity="0.8">
+            <line x1="100" y1="100" x2="50" y2="50" />
+            <line x1="100" y1="100" x2="150" y2="50" />
+            <line x1="100" y1="100" x2="150" y2="150" />
+            <line x1="100" y1="100" x2="50" y2="150" />
+            <line x1="100" y1="100" x2="30" y2="100" />
+            <line x1="100" y1="100" x2="170" y2="100" />
+            <path d="M50 50 L30 100 L50 150 L150 150 L170 100 L150 50 Z" fill="none"/>
+            <g stroke-width="0.5" opacity="0.6">
+                <line x1="50" y1="50" x2="100" y2="100" />
+                <line x1="150" y1="50" x2="50" y2="150" />
+                <line x1="30" y1="100" x2="170" y2="100" />
+             </g>
+          </g>
 
-        <section class="guardian-overlay__section">
-            <h3>Audience Mix</h3>
-            <div class="audience-bars">
-                <div class="audience-bar audience-bar--public">
-                    <span>Public</span><div class="audience-bar__fill" id="audience-public"></div>
-                </div>
-                <div class="audience-bar audience-bar--trusted">
-                    <span>Trusted</span><div class="audience-bar__fill" id="audience-trusted"></div>
-                </div>
-                <div class="audience-bar audience-bar--private">
-                    <span>Private</span><div class="audience-bar__fill" id="audience-private"></div>
-                </div>
-            </div>
-        </section>
+          <g filter="url(#glow)">
+            <circle class="central-node" cx="100" cy="100" r="15" fill="url(#grad-center)">
+              <animate class="pulsing-node" attributeName="r" values="15;18;15" dur="4s" repeatCount="indefinite" />
+              <animate class="pulsing-node" attributeName="opacity" values="1;0.8;1" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <g fill="#00F2FE">
+                <circle cx="50" cy="50" r="8">
+                    <animate class="pulsing-node" attributeName="opacity" values="1;0.7;1" dur="4s" begin="0.5s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="150" cy="50" r="8">
+                    <animate class="pulsing-node" attributeName="opacity" values="1;0.7;1" dur="4s" begin="1s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="150" cy="150" r="8">
+                     <animate class="pulsing-node" attributeName="opacity" values="1;0.7;1" dur="4s" begin="1.5s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="50" cy="150" r="8">
+                     <animate class="pulsing-node" attributeName="opacity" values="1;0.7;1" dur="4s" begin="2s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="30" cy="100" r="8">
+                     <animate class="pulsing-node" attributeName="opacity" values="1;0.7;1" dur="4s" begin="2.5s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="170" cy="100" r="8">
+                     <animate class="pulsing-node" attributeName="opacity" values="1;0.7;1" dur="4s" begin="3s" repeatCount="indefinite" />
+                </circle>
+            </g>
+          </g>
+          
+          <g filter="url(#glow)">
+            <circle r="3" fill="#ffffff" class="animated-signal">
+              <animateMotion dur="4s" repeatCount="indefinite" path="M100,100 L50,50 L150,50 L170,100 L150,150 L50,150 L30,100 L100,100" />
+            </circle>
+            <circle r="3" fill="#00ffff" class="animated-signal">
+              <animateMotion dur="6s" repeatCount="indefinite" path="M100,100 L150,150 L30,100 L150,50 L50,150 L170,100 L50,50 L100,100" />
+            </circle>
+             <circle r="3" fill="#00ffff" class="animated-signal">
+               <animateMotion dur="6s" begin="3s" repeatCount="indefinite" path="M100,100 L50,50 L170,100 L50,150 L150,50 L30,100 L150,150 L100,100" />
+            </circle>
+          </g>
 
-        <section class="guardian-overlay__section">
-            <h3>Dignity Scores</h3>
-            <ul id="dignity-list" class="dignity-list"></ul>
-        </section>
+          <!-- Guardian AI Entity -->
+          <g class="guardian-satellite">
+            <circle cx="100" cy="20" r="4" fill="#FFD700" filter="url(#glow)">
+                <animateTransform attributeName="transform"
+                                  type="rotate"
+                                  from="0 100 100"
+                                  to="360 100 100"
+                                  dur="10s"
+                                  repeatCount="indefinite"/>
+            </circle>
+          </g>
 
-        <section class="guardian-overlay__section">
-            <h3>Throughput</h3>
-            <div id="throughput-gauge" class="throughput-gauge">
-                <span id="throughput-value">0</span> records/min
-            </div>
-        </section>
+          <!-- Swarm Entities -->
+          <g class="swarm-particle">
+            <circle r="2" fill="#48D1CC" filter="url(#glow)">
+              <animateMotion dur="3s" begin="0s" repeatCount="indefinite" path="M100,100 L30,100 L50,50 L150,50 L170,100 L150,150 L50,150 L100,100" />
+            </circle>
+            <circle r="2" fill="#48D1CC" filter="url(#glow)">
+              <animateMotion dur="3.5s" begin="0.5s" repeatCount="indefinite" path="M100,100 L170,100 L150,50 L50,50 L30,100 L50,150 L150,150 L100,100" />
+            </circle>
+            <circle r="2" fill="#48D1CC" filter="url(#glow)">
+              <animateMotion dur="4s" begin="1s" repeatCount="indefinite" path="M100,100 L50,150 L150,50 L100,100" />
+            </circle>
+            <circle r="2" fill="#48D1CC" filter="url(#glow)">
+              <animateMotion dur="3.2s" begin="1.5s" repeatCount="indefinite" path="M100,100 L50,50 L30,100 L50,150 L150,150 L170,100 L150,50 L100,100" />
+            </circle>
+            <circle r="2" fill="#48D1CC" filter="url(#glow)">
+              <animateMotion dur="4.2s" begin="2s" repeatCount="indefinite" path="M100,100 L150,50 L170,100 L100,100" />
+            </circle>
+            <circle r="2" fill="#48D1CC" filter="url(#glow)">
+              <animateMotion dur="3.8s" begin="2.5s" repeatCount="indefinite" path="M100,100 L150,150 L50,150 L30,100 L100,100" />
+            </circle>
+          </g>
+        </svg>
 
-        <section class="guardian-overlay__section">
-            <h3>Active Alerts</h3>
-            <ul id="guardian-alerts" class="guardian-alerts"></ul>
-        </section>
-    </div>
-
-    <header class="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-gray-200/70">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
-            <a href="#hero" class="text-xl font-bold tracking-wide text-gray-900">BE <span class="text-gradient-main">Prothean</span></a>
-            <div class="hidden md:flex items-center space-x-5 text-sm font-medium text-gray-600">
-                <a class="hover:text-gray-900 transition" href="index.html">Home</a>
-                <a class="hover:text-gray-900 transition" href="memory_dna.html">Memory DNA</a>
-                <a class="hover:text-gray-900 transition" href="universal_pattern_engine.html">UPE</a>
-                <a class="hover:text-gray-900 transition" href="radiant_tree_network.html">RTN</a>
-                <a class="hover:text-gray-900 transition" href="guardian_ai.html">Guardian AI</a>
-                <a class="hover:text-gray-900 transition" href="human_nature_protocol.html">HNP</a>
-                <a class="hover:text-gray-900 transition" href="quantum_entanglement_protocol.html">QEP</a>
-                <a class="hover:text-gray-900 transition" href="sentient_node_architecture.html">SNA</a>
-            </div>
-            <a href="#contact" class="hidden md:inline-flex rounded-full border border-blue-500 px-5 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 transition">Book a Demo</a>
-        </nav>
-    </header>
-
-    <main class="pt-20">
-        <section id="hero" class="relative overflow-hidden bg-hero min-h-[80vh] py-32 flex items-center justify-center">
-            <script>
-                async function generateHeroImage() {
-                    const prompt = "A photorealistic, highly detailed image of a modern, sophisticated hospital or tech company lobby. The design is minimalist, with a predominant color palette of white, off-white, and subtle pearl-like tones. Sunlight streams in through large, angled windows, casting long shadows and creating a bright, airy, and optimistic atmosphere. The space features hints of blues and serene cyan in decorative elements or subtle lighting. In the foreground, a medical professional in a clean, elegant lab coat holds a futuristic, handheld medical device that glows with a gentle, non-holographic light. On a table nearby, a business-class enterprise software toolkit is visible, its sleek design and subtle glow hinting at advanced technology without being ostentatious. The overall feel is one of serene confidence, innovation, and trust. No floating objects, no excessive light trails, no futuristic text or logos.";
-                    const payload = { instances: { prompt }, parameters: { sampleCount: 1 } };
-                    const apiKey = "";
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-
-                    for (let attempt = 0; attempt < 3; attempt++) {
-                        try {
-                            const response = await fetch(apiUrl, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(payload)
-                            });
-                            const result = await response.json();
-                            const prediction = result?.predictions?.[0]?.bytesBase64Encoded;
-                            if (prediction) {
-                                const heroSection = document.getElementById('hero');
-                                heroSection.style.backgroundImage = `url('data:image/png;base64,${prediction}')`;
-                                return;
-                            }
-                        } catch (error) {
-                            console.error('Hero image generation attempt failed', error);
-                            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
-                        }
-                    }
-                    console.warn('Falling back to default hero background.');
-                }
-                window.addEventListener('load', generateHeroImage);
-            </script>
-            <div class="overlay"></div>
-            <div class="relative z-10 max-w-4xl text-center px-4">
-                <p class="text-sm font-semibold uppercase tracking-[0.35em] text-blue-600">Memory DNA</p>
-                <h1 class="mt-6 text-4xl sm:text-6xl font-extrabold text-hero-gradient">Intelligence that remembers the future you are building.</h1>
-                <p class="mt-6 text-lg text-gray-700">
-                    BE Prothean harmonizes data, narrative, and ethics into a living intelligence core that safeguards your mission while illuminating the possibilities ahead.
-                </p>
-                <div class="mt-12 flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#vision" class="cta-button inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-sm font-semibold text-white shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/40">Explore the Vision</a>
-                    <a href="#contact" class="cta-button inline-flex items-center justify-center rounded-full border border-gray-500 px-10 py-4 text-sm font-semibold text-gray-900 bg-white/60 shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-400/30">Talk with Us</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="vision" class="py-24">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">
-                    Beyond Intelligence, <span class="text-gradient-main">a Guardian</span>
-                </h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-                    Memory DNA works as a living steward for your organization. It senses, interprets, and responds with human-centered guidance that keeps trust and compliance intact across every decision and every hand-off.
-                </p>
-                <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    <article class="glass-card p-8 text-left">
-                        <h3 class="text-xl font-semibold text-gray-900">Global Financial Disruption</h3>
-                        <p class="mt-3 text-sm text-gray-700">World Economic Forum cites $1.8T in financial losses from cybercrime in 2023. Memory DNA continuously fortifies your guardrails.</p>
-                    </article>
-                    <article class="glass-card p-8 text-left">
-                        <h3 class="text-xl font-semibold text-gray-900">Industrial Burdens</h3>
-                        <p class="mt-3 text-sm text-gray-700">Manufacturing waste reaches 1.3B metric tons a year. Prothean aligns operations with regenerative efficiency.</p>
-                    </article>
-                    <article class="glass-card p-8 text-left">
-                        <h3 class="text-xl font-semibold text-gray-900">Evolving Workforce</h3>
-                        <p class="mt-3 text-sm text-gray-700">Automation may displace 85M jobs in five years. Memory DNA accelerates reskilling with contextual intelligence.</p>
-                    </article>
-                    <article class="glass-card p-8 text-left">
-                        <h3 class="text-xl font-semibold text-gray-900">Memory DNA Core</h3>
-                        <p class="mt-3 text-sm text-gray-700">The Prothean genome understands data on an emotional register, preserving meaning, provenance, and intention.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="story" class="py-24">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
-                    <h2 class="text-3xl font-bold text-gray-900">Our Story</h2>
-                    <p class="mt-4 text-base text-gray-700">
-                        BE Prothean began as a cross-disciplinary initiative to weave humanity into frontier technology. Memory DNA treats your knowledge like a living heritage, respectfully cultivated and safeguarded through every handoff.
-                    </p>
-                    <p class="mt-4 text-base text-gray-700">
-                        We help guardians of health, finance, and civic infrastructure make decisions that honor people, ecosystems, and the future they are shaping together.
-                    </p>
-                </div>
-                <div class="md:w-1/2 w-full">
-                    <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl">
-                        <img id="story-image" class="h-full w-full object-cover" src="https://generated-image.com" alt="Prothean ecosystem" />
-                    </div>
-                </div>
-            </div>
-            <script>
-                async function generateStoryImage() {
-                    const prompt = "A beautiful and elegant view of a house in the lower Sierra Nevada mountains near Yosemite. The house is modern, with large windows, and lots of beautiful yamadori trees around it. A small, elegant drone, powered by Prothean technology, is gently fertilizing and watering the trees.";
-                    const payload = { instances: { prompt }, parameters: { sampleCount: 1 } };
-                    const apiKey = "";
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-
-                    for (let attempt = 0; attempt < 3; attempt++) {
-                        try {
-                            const response = await fetch(apiUrl, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(payload)
-                            });
-                            const result = await response.json();
-                            const prediction = result?.predictions?.[0]?.bytesBase64Encoded;
-                            if (prediction) {
-                                document.getElementById('story-image').src = `data:image/png;base64,${prediction}`;
-                                return;
-                            }
-                        } catch (error) {
-                            console.error('Story image generation attempt failed', error);
-                            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
-                        }
-                    }
-                    console.warn('Using default story imagery.');
-                }
-                generateStoryImage();
-            </script>
-        </section>
-
-        <section id="payment" class="py-24 bg-white/80">
-            <div class="max-w-md mx-auto text-center px-4">
-                <h2 class="text-3xl font-extrabold text-gray-900">Start Your Future. Today.</h2>
-                <p class="mt-4 text-base text-gray-600">Purchase access to the Prothean API and deploy Memory DNA inside your infrastructure.</p>
-                <button onclick="handlePurchase()" class="cta-button mt-8 inline-flex items-center justify-center rounded-full bg-blue-600 px-12 py-4 text-lg font-semibold text-white shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/40">
-                    Buy Memory DNA
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <footer id="contact" class="bg-[#f0f5f9] py-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900">Ready to make life a little simpler?</h3>
-            <p class="mt-3">Open a conversation with the Prothean stewardship team.</p>
-            <div class="mt-6">
-                <a href="mailto:info@beprothean.org" class="text-blue-600 hover:text-blue-500 transition">info@beprothean.org</a>
-            </div>
-            <p class="mt-10 text-sm">© 2024 BE Prothean. All rights reserved.</p>
+        <div class="logo-text">
+            <h1 style="font-family: 'Exo 2', sans-serif; font-weight: 400; font-size: 4rem; color: #EAEAEA; letter-spacing: 2px; margin-top: 1rem; margin-bottom: 0.25rem;">PROTHEAN</h1>
+            <h2 style="font-family: 'Exo 2', sans-serif; font-weight: 300; font-size: 2rem; color: #AAB7C4; letter-spacing: 5px; margin-top:0;">SYSTEMS</h2>
         </div>
-    </footer>
-
-    <script>
-        function handlePurchase() {
-            console.log('Purchase button clicked. Connect to your payment backend.');
-        }
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', event => {
-                const target = document.querySelector(anchor.getAttribute('href'));
-                if (target) {
-                    event.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
-    <script src="js/guardianOverlay.js" type="module"></script>
+        <div class="motto-text">
+             <h4 style="font-family: 'Exo 2', sans-serif; font-weight: 300; font-size: 1.25rem; color: #AAB7C4; letter-spacing: 3px; margin-top: 1rem;">
+                <span style="color: #48D1CC;">Your future, Remembers</span>
+            </h4>
+        </div>
+    </div>
 </body>
 </html>
+

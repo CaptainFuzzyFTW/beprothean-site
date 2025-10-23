@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prothean AI Network</title>
-    <!-- Security headers: Content Security Policy, Referrer Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; form-action 'self';">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <meta name="referrer-policy" content="no-referrer-when-downgrade">
     <style>
         /* --- Global Styles --- */
         body {
@@ -15,40 +11,289 @@
             padding: 0;
             overflow: hidden; /* Initially hidden */
         }
+
+        /* --- Entry Page Styles (Restored to Original) --- */
         @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap');
-        /* (remaining CSS unchanged) */
-    </style>
-</head>
-<body>
+        
+        #entry-page-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #05040f;
+            overflow: hidden;
+            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                              radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                              radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+                              radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+            animation: move-stars 300s linear infinite;
+            transition: opacity 1s ease-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+        }
 
-    <!-- Entry Page Wrapper (Restored to user's original) -->
-    <div id="entry-page-wrapper">
-        <div class="container">
-            <svg id="prothean-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="grad-center" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00F2FE" /><stop offset="100%" stop-color="#4C83FF" /></radialGradient>
-                <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <filter id="glow-intense"><feGaussianBlur stdDeviation="4.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              </defs>
-              <!-- simplified SVG content omitted for brevity in commit message; full file content committed -->
-            </svg>
-            <div class="logo-text">
-                <h1 style="font-family: 'Exo 2', sans-serif; font-weight: 400; font-size: 4rem; color: #EAEAEA; letter-spacing: 2px; margin-top: 1rem; margin-bottom: 0.25rem;">PROTHEAN</h1>
-                <h2 style="font-family: 'Exo 2', sans-serif; font-weight: 300; font-size: 2rem; color: #AAB7C4; letter-spacing: 5px; margin-top:0;">SYSTEMS</h2>
-            </div>
-            <div class="motto-text">
-                 <h4 style="font-family: 'Exo 2', sans-serif; font-weight: 300; font-size: 1.25rem; color: #AAB7C4; letter-spacing: 3px; margin-top: 1rem;">
-                    <span style="color: #48D1CC;">Your future, Remembers</span>
-                </h4>
-            </div>
-            <div id="enter-button" class="enter-prompt">ENTER SYSTEM</div>
-        </div>
-    </div>
+        #entry-page-wrapper.fading-out {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    <!-- Announcement and Main content (unchanged) -->
-    <!-- ... full unchanged content preserved ... -->
+        @keyframes move-stars {
+            from {background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;}
+            to {background-position: -10000px 5000px, -10040px 5060px, -10130px 5270px, -10070px 5100px;}
+        }
 
-    <!-- Include external safe script (no external network calls) -->
-    <script src="/safe-entry.js" defer></script>
-</body>
-</html>
+        #entry-page-wrapper .container { 
+            text-align: center;
+        }
+
+        #entry-page-wrapper svg {
+            width: 80%;
+            max-width: 900px;
+            height: auto;
+            transform-origin: center;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #entry-page-wrapper .container:hover svg {
+            transform: scale(1.02);
+        }
+
+        #entry-page-wrapper .logo-text, #entry-page-wrapper .motto-text { transition: opacity 0.5s ease; }
+        #entry-page-wrapper .logo-text { opacity: 0; animation: fadeInText-entry 2s ease-in-out 1s forwards; }
+        #entry-page-wrapper .motto-text { opacity: 0; animation: fadeInSubText-entry 2s ease-in-out 2.5s forwards; }
+
+        #entry-page-wrapper .enter-prompt {
+            opacity: 0;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+            font-size: 1.25rem;
+            color: #AAB7C4;
+            letter-spacing: 5px;
+            margin-top: 2rem;
+            border: 1px solid #AAB7C4;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            animation: fadeInSubText-entry 2s ease-in-out 3.5s forwards;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #entry-page-wrapper .enter-prompt:hover {
+            color: #FFF;
+            border-color: #FFF;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fadeInText-entry {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInSubText-entry {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- Announcement Page Styles --- */
+        #announcement-wrapper {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #announcement-wrapper .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        #announcement-wrapper .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #announcement-wrapper h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.618rem;
+            letter-spacing: -0.02em;
+        }
+
+        #announcement-wrapper h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.618rem;
+        }
+
+        #announcement-wrapper h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        #announcement-wrapper p, #announcement-wrapper li {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 1.618rem;
+        }
+
+        #announcement-wrapper .gold {
+            color: #C9A961;
+        }
+
+        #announcement-wrapper .massive {
+            font-size: clamp(5rem, 15vw, 12rem);
+            font-weight: 800;
+            color: #C9A961;
+            line-height: 1;
+            display: block;
+            margin: 2rem 0;
+        }
+
+        #announcement-wrapper .dedication {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-style: italic;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #announcement-wrapper .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            margin-top: 3rem;
+        }
+
+        #announcement-wrapper .feature {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        #announcement-wrapper .feature h3 {
+            margin-bottom: 1rem;
+        }
+
+        #announcement-wrapper ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #announcement-wrapper li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        #announcement-wrapper li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #C9A961;
+            font-weight: bold;
+        }
+
+        #announcement-wrapper .section-alt {
+            background: #0a0a0a;
+        }
+
+        #announcement-wrapper .legal {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #announcement-wrapper .highlight {
+            background: linear-gradient(120deg, transparent 0%, rgba(201, 169, 97, 0.2) 50%, transparent 100%);
+            padding: 0.2em 0;
+        }
+        
+        #announcement-wrapper .grid-2 p {
+             margin-bottom: 1rem;
+        }
+
+
+        /* --- Main Homepage Styles --- */
+        :root {
+          /* Color Tokens */
+          --color-black: #000000;
+          --color-white: #FFFFFF;
+          --color-light-gray: #f0f0f0;
+          --color-gray: #888;
+          --color-dark-gray: #333;
+          --color-orange: #FF8C00;
+
+          /* Semantic Colors */
+          --color-background: var(--color-white);
+          --color-text: var(--color-black);
+          --color-text-secondary: #555;
+          --color-primary: var(--color-black);
+          --color-warning: var(--color-orange);
+          --color-border: #ccc;
+          --color-border-light: #eee;
+          --color-border-focus: var(--color-black);
+
+          /* Typography */
+          --font-family-base: "Exo 2", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          --font-family-mono: "Courier New", Courier, monospace;
+          --font-size-base: 16px;
+          --font-size-lg: 18px;
+          --font-size-xl: 20px;
+          --font-size-2xl: 24px;
+          --font-size-3xl: 30px;
+          --font-size-4xl: 36px;
+          --font-weight-normal: 700; /* BOLD */
+          --font-weight-medium: 700; /* BOLD */
+          --line-height-tight: 1.2;
+          --line-height-normal: 1.6;
+
+          /* Spacing */
+          --space-8: 8px; --space-12: 12px; --space-16: 16px; --space-24: 24px; --space-32: 32px;
+          
+          /* Golden Ratio Spacing */
+          --phi: 1.61803398875;
+          --base-unit: 1rem; /* 16px */
+          --space-minor: calc(var(--base-unit) / var(--phi)); /* ~9.9px */
+          --space-base: var(--base-unit); /* 16px */
+          --space-major: calc(var(--base-unit) * var(--phi)); /* ~25.9px */
+
+          /* Border Radius & Shadows */
+          --radius-md: 8px; --radius-lg: 12px;
+        
+          /* Animation */
+          --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        #main-page-wrapper {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-family-base);
+            line-height: var(--line-height-normal);
+            font-weight: var(--font-weight-normal);
+        }
+
+        #main-page-wrapper .container { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-32); }
+
+        /* Typography */
+        #main-page-wrapper h2, #main-page-wrapper h3, #main-page-wrapper p, #main-page-wrapper li, #main-page-wrapper h4 {
+            /* Applied Living Ink to all modules content */
+            animation: living-ink 8s ease-in-out infinite alternate; 
+            font-weight: 700; /* Ensure BOLD is applied */
+        }
+
+        #main-page-wrapper h2 { font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-16); color: var(--color-text); line-height: var(--line-height-tig[...]

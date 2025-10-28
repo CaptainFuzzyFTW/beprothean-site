@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prothean Collective Wisdom Analytics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      background: #000; 
+      color: #0f0; 
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #0f0;
+    }
+    h1 { 
+      font-size: 2.5rem; 
+      font-weight: 200;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    .phi { 
+      font-size: 0.9rem; 
+      opacity: 0.618; 
+      letter-spacing: 3px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: rgba(0, 255, 0, 0.05);
+      border: 1px solid rgba(0, 255, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-value { 
+      font-size: 3rem; 
+      font-weight: 200;
+      margin-bottom: 5px;
+    }
+    .stat-label { 
+      font-size: 0.85rem; 
+      opacity: 0.618; 
+      text-transform: uppercase; 
+      letter-spacing: 1.5px;
+    }
+    .chart-container {
+      background: rgba(0, 255, 0, 0.05);
+      border: 1px solid rgba(0, 255, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+    }
+    th, td { 
+      border: 1px solid rgba(0, 255, 0, 0.2); 
+      padding: 12px; 
+      text-align: left;
+    }
+    th { 
+      background: rgba(0, 255, 0, 0.1);
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+    tr:hover {
+      background: rgba(0, 255, 0, 0.05);
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-size: 1.2rem;
+      opacity: 0.618;
+    }
+    .timestamp {
+      text-align: center;
+      margin-top: 40px;
+      opacity: 0.618;
+      font-size: 0.85rem;
+    }
+    .success { color: #0f0; }
+    .warning { color: #ff0; }
+    .error { color: #f00; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🧠 PROTHEAN COLLECTIVE WISDOM</h1>
+  <div class="phi">φ = 1.618033988749895</div>
+  <div class="phi" style="margin-top: 10px;">Real-Time Analytics Dashboard</div>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value" id="totalConcepts">—</div>
+    <div class="stat-label">Total Concepts</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="totalQueries">—</div>
+    <div class="stat-label">Total Queries</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="wikiDep">—</div>
+    <div class="stat-label">Wikipedia Dependency</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="avgConf">—</div>
+    <div class="stat-label">Average Confidence</div>
+  </div>
+</div>
+
+<div class="chart-container">
+  <h2 style="margin-bottom: 20px; font-weight: 300; font-size: 1.5rem;">Top Concepts Explored</h2>
+  <div id="loading" class="loading">Loading data from Firebase...</div>
+  <table id="conceptsTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>Frequency</th>
+        <th>Confidence</th>
+        <th>Wikipedia %</th>
+      </tr>
+    </thead>
+    <tbody id="conceptsTableBody"></tbody>
+  </table>
+</div>
+
+<div class="timestamp" id="lastUpdate">Last updated: —</div>
+
+<script>
+// Firebase Configuration - SAME AS index.html
+const firebaseConfig = {
+  apiKey: "AIzaSyBDwWp9zUFulG4XeEuYeJenuCPCtgremgk",
+  authDomain: "prothean-collective.firebaseapp.com",
+  projectId: "prothean-collective",
+  storageBucket: "prothean-collective.firebasestorage.app",
+  messagingSenderId: "311029626826",
+  appId: "1:311029626826:web:e85e77a168e039c8c1c133"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function loadAnalytics() {
+  try {
+    const snapshot = await db.collection('wisdom_patterns')
+      .orderBy('frequency', 'desc')
+      .limit(50)
+      .get();
+
+    let totalQueries = 0;
+    let totalConfidence = 0;
+    let totalWikiDep = 0;
+    let count = 0;
+
+    const tbody = document.getElementById('conceptsTableBody');
+    tbody.innerHTML = '';
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      totalQueries += data.total_queries || 0;
+      totalConfidence += data.avg_confidence || 0;
+      totalWikiDep += data.wikipedia_dependency || 0;
+      count++;
+
+      const row = tbody.insertRow();
+      row.insertCell(0).textContent = data.concept;
+      row.insertCell(1).textContent = data.frequency;
+      row.insertCell(2).innerHTML = `<span class="success">${((data.avg_confidence || 0) * 100).toFixed(0)}%</span>`;
+      
+      const wikiPct = ((data.wikipedia_dependency || 0) * 100).toFixed(0);
+      const wikiClass = wikiPct < 30 ? 'success' : wikiPct < 60 ? 'warning' : 'error';
+      row.insertCell(3).innerHTML = `<span class="${wikiClass}">${wikiPct}%</span>`;
+    });
+
+    // Update summary stats
+    document.getElementById('totalConcepts').textContent = count;
+    document.getElementById('totalQueries').textContent = totalQueries;
+    
+    const avgWikiDep = count > 0 ? (totalWikiDep / count) * 100 : 0;
+    const wikiDepClass = avgWikiDep < 30 ? 'success' : avgWikiDep < 60 ? 'warning' : 'error';
+    document.getElementById('wikiDep').innerHTML = `<span class="${wikiDepClass}">${avgWikiDep.toFixed(0)}%</span>`;
+    
+    const avgConf = count > 0 ? (totalConfidence / count) * 100 : 0;
+    document.getElementById('avgConf').innerHTML = `<span class="success">${avgConf.toFixed(0)}%</span>`;
+
+    // Show table, hide loading
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('conceptsTable').style.display = 'table';
+
+    // Update timestamp
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent = `Last updated: ${now.toLocaleTimeString()}`;
+
+    console.log('✓ Analytics loaded:', { concepts: count, queries: totalQueries });
+  } catch(e) {
+    document.getElementById('loading').innerHTML = `<span class="error">Error loading data: ${e.message}</span>`;
+    console.error('Analytics error:', e);
+  }
+}
+
+// Load on startup
+loadAnalytics();
+
+// Auto-refresh every 30 seconds
+setInterval(loadAnalytics, 30000);
+
+console.log('Prothean Analytics Dashboard initialized | φ = 1.618033988749895');
+</script>
+
+</body>
+</html>

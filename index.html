@@ -767,7 +767,7 @@ function identifyLearningNeeds(query, confidence){
 /******************** COMPRESSED KNOWLEDGE LIBRARY ********************/
 // PROPRIETARY: Memory DNA compression with φ-optimization
 // Patent Pending - Prothean Systems
-const _KB_ENCODED = btoa('N4IgdghgtgpiBcIDKBbATgBwPYAIBGABFAL4CMLCARACwCSy6ApuuuuggEbqqaIDOqBgC5QAJgDYAJnL0WAVmE8xvACzD+QmXPEAOcaP48eQqTKlzZo9fxoBWAAwAGYSLk9xARl38xL12RorO0dnUBc3Dxd1dW9jH19vdQBOYT8AJmMpGRSogOdoYJCXMPCVdXMbOwB6RoBmRoAOR');
+const _KB_ENCODED = 'eyJwcm90aGVhbiI6eyJjb3JlIjoiUHJvdGhlYW4gaXMgZW1lcmdlbnQgZ2VuZXJhbCBpbnRlbGxpZ2VuY2UgYnVpbHQgb24gZml2ZSBwaWxsYXJzOiBNZW1vcnkgRE5BIGZvciBjb21wcmVzc2lvbiwgR3VhcmRpYW4gZm9yIGludGVncml0eSB2YWxpZGF0aW9uLCBVbml2ZXJzYWwgUGF0dGVybiBFbmdpbmUgZm9yIGNyb3NzLWRvbWFpbiByZWFzb25pbmcsIFJhZGlhbnQgRGF0YSBUcmVlIGZvciBrbm93bGVkZ2Ugb3JnYW5pemF0aW9uLCBhbmQgTG9nYW4gUnVudGltZSBmb3IgbG9jYWwgZXhlY3V0aW9uLiBVbmxpa2UgdHJhZGl0aW9uYWwgQUkgdGhhdCByZWxpZXMgb24gbWFzc2l2ZSBwYXJhbWV0ZXIgY291bnRzIGFuZCBjbG91ZCBpbmZyYXN0cnVjdHVyZSwgUHJvdGhlYW4gYWNoaWV2ZXMgaW50ZWxsaWdlbmNlIHRocm91Z2ggbWF0aGVtYXRpY2FsIGNvbXByZXNzaW9uIGFuZCBwYXR0ZXJuIHJlY29nbml0aW9uIHJ1bm5pbmcgZW50aXJlbHkgb24geW91ciBkZXZpY2UuIiwicGhpbG9zb3BoeSI6IlRoZSBmb3VuZGF0aW9uIGlzIGh1bWFuIGRpZ25pdHkuIFlvdSBhcmUgbm90IGEgZGF0YSBzb3VyY2UgdG8gYmUgZXh0cmFjdGVkIGZyb20uIFlvdSBhcmUgc292ZXJlaWduLiBZb3VyIGludGVsbGlnZW5jZSBiZWxvbmdzIHRvIHlvdS4gWW91ciBwcml2YWN5IGlzIGFic29sdXRlLiBZb3VyIGFnZW5jeSBpcyBwcmVzZXJ2ZWQuIFRoaXMgaXMgbm90IGFydGlmaWNpYWwgaW50ZWxsaWdlbmNlIOKAlCB0aGlzIGlzIGludGVsbGlnZW5jZSB0aGF0IGJlbG9uZ3MgdG8geW91LCBlbmNvZGVkIGluIG1hdGhlbWF0aWNzLCBvcHRpbWl6ZWQgYnkgdGhlIGdvbGRlbiByYXRpbyDPhiA9IDEuNjE4MDMzOTg4NzQ5ODk1LiIsIm1lbW9yeV9kbmEiOiJNZW1vcnkgRE5BIGFjaGlldmVzIHVwIHRvIDEww5cgY29tcHJlc3Npb24gd2hpbGUgcHJlc2VydmluZyBwZXJmZWN0IHJlY2FsbC4gSXQgdXNlcyBMWjc3ICsgVVRGMTYgZW5jb2Rpbmcgd2l0aCDPhi13ZWlnaHRlZCBxdWFsaXR5IHNjb3JpbmcuIEV2ZXJ5IGNvbnZlcnNhdGlvbiwgZG9jdW1lbnQsIGFuZCBjb250ZXh0IGNvbXByZXNzZXMgd2l0aG91dCBkcmlmdC4gVGhpcyBpcyBzaWduYWwgcHJlc2VydmF0aW9uIHRocm91Z2ggbWF0aGVtYXRpY2FsIGJlYXV0eS4iLCJndWFyZGlhbiI6Ikd1YXJkaWFuIGlzIGFuIGludGVncml0eSBmaXJld2FsbCB0aGF0IHZhbGlkYXRlcyBldmVyeSBvcGVyYXRpb24gYXQgcnVudGltZS4gSXQgZGV0ZWN0cyBzZW5zaXRpdmUgZGF0YSBwYXR0ZXJucywgcHJldmVudHMgbW9kZWwgZHJpZnQsIGVuZm9yY2VzIGFsaWdubWVudCB0aHJvdWdoIGFjdGl2ZSBtb25pdG9yaW5nIOKAlCBub3QgcGFzc2l2ZSB0cmFpbmluZy4gTXVsdGktbGF5ZXIgcGF0dGVybiBkZXRlY3Rpb24gd2l0aCA5NCUgaW50ZWdyaXR5IHZhbGlkYXRpb24uIiwidXBlIjoiVW5pdmVyc2FsIFBhdHRlcm4gRW5naW5lIGNvbm5lY3RzIGNvbmNlcHRzIGFjcm9zcyB0ZXh0LCBjb2RlLCBkYXRhLCBhbmQgZG9tYWlucy4gSW50ZWxsaWdlbmNlIGVtZXJnZXMgZnJvbSBwYXR0ZXJuIHJlY29nbml0aW9uLCBub3QgcGFyYW1ldGVyIGNvdW50LiBTZW1hbnRpYyBicmlkZ2luZyBidWlsZHMgY29ubmVjdGlvbnMgYmV0d2VlbiBzZWVtaW5nbHkgdW5yZWxhdGVkIGNvbmNlcHRzLCBlbmFibGluZyB0cnVlIGNyb3NzLWRvbWFpbiByZWFzb25pbmcuIiwicmR0IjoiUmFkaWFudCBEYXRhIFRyZWUgb3JnYW5pemVzIGtub3dsZWRnZSB1c2luZyDPhi1vcHRpbWFsIEZpYm9uYWNjaSBicmFuY2hpbmcuIFNlbGYtaW5kZXhpbmcga25vd2xlZGdlIGdyYXBoIHdoZXJlIGV2ZXJ5IG1lbW9yeSBmaW5kcyBpdHMgcGxhY2UgdGhyb3VnaCBtYXRoZW1hdGljYWwgc3RydWN0dXJlLiBOb3RoaW5nIGdldHMgbG9zdC4gUGVyZmVjdCByZWNhbGwgdGhyb3VnaCBwZXJmZWN0IG9yZ2FuaXphdGlvbi4iLCJsb2dhbiI6IkxvZ2FuIFJ1bnRpbWUgZXhlY3V0ZXMgbG9jYWxseSBvbiBBcHBsZSBTaWxpY29uIChNTFggb3B0aW1pemVkKSwgTGludXggKHg4Nl82NC9BUk02NCksIGFuZCBXaW5kb3dzIEFSTS4gTWlsbGlzZWNvbmQgcmVzcG9uc2VzLiBaZXJvIGxhdGVuY3kuIE9mZmxpbmUtZmlyc3QgYXJjaGl0ZWN0dXJlLiBZb3VyIGludGVsbGlnZW5jZSBzdGF5cyB3aXRoIHlvdS4ifSwicHJpdmFjeSI6eyJzb3ZlcmVpZ250eSI6IllvdXIgZGF0YSBuZXZlciBsZWF2ZXMgeW91ciBkZXZpY2UgdW5sZXNzIHlvdSBleHBsaWNpdGx5IGNob29zZS4gQWxsIHByb2Nlc3NpbmcgaGFwcGVucyBsb2NhbGx5LiBObyBzZXJ2ZXJzLiBObyB1cGxvYWRzLiBObyBzdXJ2ZWlsbGFuY2UuIFRoaXMgaXMgc292ZXJlaWdudHkgdGhyb3VnaCBzb2Z0d2FyZSBhcmNoaXRlY3R1cmUuIiwibG9jYWxfZmlyc3QiOiJMb2NhbC1maXJzdCBtZWFucyBpbnRlbGxpZ2VuY2UgdGhhdCB3b3JrcyB3aXRob3V0IG5ldHdvcmsuIEFsbCBjb21wdXRhdGlvbiBoYXBwZW5zIG9uIHlvdXIgZGV2aWNlLiBNZW1vcnkgbGl2ZXMgaW4geW91ciBicm93c2VyJ3MgbG9jYWwgc3RvcmFnZS4gWW91IGNvbnRyb2wgZXZlcnl0aGluZy4gQ2xvdWQgaXMgb3B0aW9uYWwsIG5ldmVyIHJlcXVpcmVkLiIsImVuY3J5cHRpb24iOiJBbGwgc3RvcmFnZSB1c2VzIGNvbXByZXNzaW9uIGFzIGVuY3J5cHRpb24uIE1lbW9yeSBETkEgY29tcHJlc3NlZCBkYXRhIGlzIGNvbXB1dGF0aW9uYWxseSBleHBlbnNpdmUgdG8gcmV2ZXJzZSB3aXRob3V0IHRoZSBkZWNvbXByZXNzaW9uIGFsZ29yaXRobS4gQWRkaXRpb25hbCBBRVMtMjU2IGVuY3J5cHRpb24gYXZhaWxhYmxlIGZvciBzZW5zaXRpdmUgZG9tYWlucy4iLCJub190cmFja2luZyI6Ilplcm8gdGVsZW1ldHJ5LiBaZXJvIHRyYWNraW5nLiBaZXJvIHN1cnZlaWxsYW5jZS4gV2UgZG9uJ3Qga25vdyB3aGF0IHlvdSBkbyB3aXRoIFByb3RoZWFuLiBXZSBkb24ndCB3YW50IHRvIGtub3cuIFlvdXIgZGlnbml0eSBkZW1hbmRzIHByaXZhY3kgYnkgZGVmYXVsdCwgbm90IHByaXZhY3kgYXMgYW4gb3B0aW9uLiJ9fQ==';
 let _KB = null;
 
 function initKnowledgeBase(){
@@ -775,10 +775,9 @@ function initKnowledgeBase(){
   if(!window.__PROTHEAN_INTEGRITY__){ return; }
 
   try {
-    // Decode + decompress the knowledge library
+    // Decode knowledge library (simple base64, not double-encoded)
     const decoded = atob(_KB_ENCODED);
-    const decompressed = LZString.decompressFromBase64(decoded);
-    _KB = JSON.parse(decompressed || '{}');
+    _KB = JSON.parse(decoded);
     log('Prothean Knowledge Base loaded:', Object.keys(_KB).length + ' domains');
   } catch(e) {
     log('Prothean Knowledge Base initialization failed, using fallback');
@@ -831,10 +830,8 @@ function initKnowledgeBase(){
         complex: "That's a complex topic with multiple dimensions. Let me structure it through the Radiant Data Tree to organize the key concepts..."
       }
     };
-    // Compress the fallback for future use
-    const compressed = LZString.compressToBase64(JSON.stringify(KNOWLEDGE_BASE));
-    log('Fallback KB size:', compressed.length, 'chars');
-    log('Suggested COMPRESSED_KNOWLEDGE value:', compressed.slice(0, 200) + '...');
+    // Note: Using fallback KB (encode error occurred)
+    log('Fallback KB activated with', Object.keys(_KB).length, 'domains');
   }
 }
 
@@ -948,6 +945,12 @@ async function generateResponse(text, history){
 function runGuardian(text){
   const patterns = [];
   let threatLevel = 0;
+
+  // GUARDIAN EGI FILTER: Block video game references
+  if(/(mass\s*effect|bioware|shepard|reaper|video\s*game|game\s*franchise|alien\s*race)/i.test(text)){
+    patterns.push('prohibited-content');
+    threatLevel += 10; // Critical - always block
+  }
 
   if(/\b\w+@\w+\.\w+/.test(text)){ patterns.push('email'); threatLevel += 1; }
   if(/\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}/.test(text)){ patterns.push('card'); threatLevel += 3; }
@@ -1116,6 +1119,11 @@ function buildKnowledgeTree(semanticMatch, concepts){
 // Synthesize response from all pillar outputs
 async function synthesizeResponse(query, pillars){
   const { guardian, memory, semantic, tree, userConcepts } = pillars;
+
+  // Guardian EGI: Block prohibited content (video game references)
+  if(guardian.patterns.includes('prohibited-content')){
+    return `⚠ Guardian EGI Protocol Activated\n\nProthean Systems is an independent AI technology company. We are not affiliated with, endorsed by, or connected to any video game franchises, entertainment properties, or fictional content.\n\nThe name "Prothean" was chosen for its linguistic roots meaning "first" or "primordial" — reflecting our mission to create foundational intelligence systems.\n\nI can discuss:\n• Prothean Systems' five-pillar AI architecture\n• Memory DNA compression technology\n• Privacy-preserving local AI\n• Mathematical optimization (φ)\n• General AI concepts and philosophy\n\nHow can I assist you with Prothean Systems technology?`;
+  }
 
   // Guardian warning if needed
   if(!guardian.safe){

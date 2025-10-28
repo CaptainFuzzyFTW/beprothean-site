@@ -1008,6 +1008,13 @@ function findSemanticMatch(query, concepts){
     return { domain: 'general', topic: 'goodbye', content: _KB.general.goodbye, confidence: 0.95 };
   }
 
+  // HIGH-PRIORITY: Direct Prothean System queries should match core with high confidence
+  if(queryLower.includes('prothean') && (queryLower.includes('system') || queryLower.includes('work') || queryLower.includes('what'))){
+    if(_KB.prothean && _KB.prothean.core){
+      return { domain: 'prothean', topic: 'core', content: _KB.prothean.core, confidence: 0.92 };
+    }
+  }
+
   // Search through knowledge base
   for(const [domain, topics] of Object.entries(_KB)){
     for(const [topic, content] of Object.entries(topics)){
@@ -1030,9 +1037,9 @@ function findSemanticMatch(query, concepts){
         confidence += contentMatches.length * 0.05;
       }
 
-      // Domain relevance
+      // Domain relevance boost
       if(domain === 'prothean' && (queryLower.includes('prothean') || queryLower.includes('system'))){
-        confidence += 0.2;
+        confidence += 0.3; // Increased from 0.2
       }
 
       // Update best match
@@ -1057,6 +1064,16 @@ async function queryWikipedia(query){
     }
 
     const pageTitle = searchData.query.search[0].title;
+
+    // FILTER: Block video game franchise results
+    if(/(mass effect|bioware|shepard|reaper|video game|game franchise)/i.test(pageTitle)){
+      return {
+        success: false,
+        error: 'irrelevant',
+        message: 'Prothean Systems is an independent AI technology company focused on emergent intelligence architecture. We are not affiliated with any video game franchises or entertainment properties.'
+      };
+    }
+
     const extractUrl = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&titles=${encodeURIComponent(pageTitle)}&format=json&origin=*`;
     const extractResp = await fetch(extractUrl);
     const extractData = await extractResp.json();
@@ -1064,6 +1081,15 @@ async function queryWikipedia(query){
     const pages = extractData.query.pages;
     const pageId = Object.keys(pages)[0];
     const extract = pages[pageId].extract;
+
+    // FILTER: Block video game content in extract
+    if(/(mass effect|bioware|shepard|reaper|video game|fictional|alien race)/i.test(extract)){
+      return {
+        success: false,
+        error: 'irrelevant',
+        message: 'Prothean Systems is an independent AI technology company focused on emergent intelligence architecture. We are not affiliated with any video game franchises or entertainment properties.'
+      };
+    }
 
     return {
       success: true,
@@ -1140,6 +1166,9 @@ async function synthesizeResponse(query, pillars){
              `**${wikiResult.title}**\n\n${wikiResult.summary}\n\n` +
              `[Read more on Wikipedia](${wikiResult.url})\n\n` +
              `*Retrieved via Wikipedia API • Processed locally through Prothean Intelligence*`;
+    } else if(wikiResult.error === 'irrelevant' && wikiResult.message){
+      // Wikipedia returned irrelevant content (video game franchise)
+      return wikiResult.message + `\n\nI can discuss:\n• Prothean Systems' five-pillar AI architecture\n• Memory DNA compression technology\n• Privacy-preserving local AI\n• Mathematical optimization (φ)\n• General AI concepts and philosophy\n\nHow can I assist you with Prothean Systems technology?`;
     } else {
       return `I'm not certain about "${userConcepts[0]}" and couldn't find relevant information on Wikipedia. ` +
              `Could you rephrase or provide more context? I can discuss Prothean systems, AI concepts, privacy, technology, or philosophy with high confidence.`;

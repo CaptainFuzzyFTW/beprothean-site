@@ -946,12 +946,7 @@ function runGuardian(text){
   const patterns = [];
   let threatLevel = 0;
 
-  // GUARDIAN EGI FILTER: Block video game references
-  if(/(mass\s*effect|bioware|shepard|reaper|video\s*game|game\s*franchise|alien\s*race)/i.test(text)){
-    patterns.push('prohibited-content');
-    threatLevel += 10; // Critical - always block
-  }
-
+  // Sensitive data detection only (no content filtering)
   if(/\b\w+@\w+\.\w+/.test(text)){ patterns.push('email'); threatLevel += 1; }
   if(/\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}/.test(text)){ patterns.push('card'); threatLevel += 3; }
   if(/(password|secret|api[_-]?key|token)/i.test(text)){ patterns.push('secret'); threatLevel += 2; }
@@ -1120,12 +1115,7 @@ function buildKnowledgeTree(semanticMatch, concepts){
 async function synthesizeResponse(query, pillars){
   const { guardian, memory, semantic, tree, userConcepts } = pillars;
 
-  // Guardian EGI: Block prohibited content (video game references)
-  if(guardian.patterns.includes('prohibited-content')){
-    return `⚠ Guardian EGI Protocol Activated\n\nProthean Systems is an independent AI technology company. We are not affiliated with, endorsed by, or connected to any video game franchises, entertainment properties, or fictional content.\n\nThe name "Prothean" was chosen for its linguistic roots meaning "first" or "primordial" — reflecting our mission to create foundational intelligence systems.\n\nI can discuss:\n• Prothean Systems' five-pillar AI architecture\n• Memory DNA compression technology\n• Privacy-preserving local AI\n• Mathematical optimization (φ)\n• General AI concepts and philosophy\n\nHow can I assist you with Prothean Systems technology?`;
-  }
-
-  // Guardian warning if needed
+  // Guardian warning for sensitive data only
   if(!guardian.safe){
     return `⚠ Guardian Alert: Detected ${guardian.patterns.join(', ')} (threat level: ${guardian.threatLevel}/10). Recommend encryption before processing sensitive data.`;
   }
